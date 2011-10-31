@@ -1,0 +1,44 @@
+/*
+ * UNO_DanJohWenApp.java
+ */
+
+package uno_danjohwen;
+
+import org.jdesktop.application.Application;
+import org.jdesktop.application.SingleFrameApplication;
+
+/**
+ * The main class of the application.
+ */
+public class UNO_DanJohWenApp extends SingleFrameApplication {
+
+    /**
+     * At startup create and show the main frame of the application.
+     */
+    @Override protected void startup() {
+        show(new UNO_DanJohWenView(this));
+    }
+
+    /**
+     * This method is to initialize the specified window by injecting resources.
+     * Windows shown in our application come fully initialized from the GUI
+     * builder, so this additional configuration is not needed.
+     */
+    @Override protected void configureWindow(java.awt.Window root) {
+    }
+
+    /**
+     * A convenient static getter for the application instance.
+     * @return the instance of UNO_DanJohWenApp
+     */
+    public static UNO_DanJohWenApp getApplication() {
+        return Application.getInstance(UNO_DanJohWenApp.class);
+    }
+
+    /**
+     * Main method launching the application.
+     */
+    public static void main(String[] args) {
+        launch(UNO_DanJohWenApp.class, args);
+    }
+}
