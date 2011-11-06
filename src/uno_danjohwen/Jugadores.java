@@ -15,8 +15,8 @@ public class Jugadores {
     protected char Genero;
     protected boolean Activo=true;
     
-    public Jugadores(String n, int e,char g){
-        Codigo+=1;
+    public Jugadores(int cod,String n, int e,char g){
+        Codigo=cod;
         Nombre=n;
         Edad=e;
         Genero=g;

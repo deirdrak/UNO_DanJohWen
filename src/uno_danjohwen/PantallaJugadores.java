@@ -25,8 +25,8 @@ public class PantallaJugadores extends javax.swing.JFrame {
     /** Creates new form PantallaJugadores */
     public PantallaJugadores() {
         initComponents();
-     
-    txtnombre.requestFocus();
+        this.setLocationRelativeTo(null);
+        txtnombre.requestFocus();
     }
 
     /** This method is called from within the constructor to
@@ -52,16 +52,20 @@ public class PantallaJugadores extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtpassword = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(uno_danjohwen.UNO_DanJohWenApp.class).getContext().getResourceMap(PantallaJugadores.class);
+        setTitle(resourceMap.getString("Form.title")); // NOI18N
         setName("Form"); // NOI18N
 
+        jPanel1.setBackground(resourceMap.getColor("jPanel1.background")); // NOI18N
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         jPanel1.setName("jPanel1"); // NOI18N
 
+        jPanel2.setBackground(resourceMap.getColor("jPanel2.background")); // NOI18N
         jPanel2.setName("jPanel2"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(uno_danjohwen.UNO_DanJohWenApp.class).getContext().getResourceMap(PantallaJugadores.class);
         jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
+        jLabel1.setForeground(resourceMap.getColor("jLabel1.foreground")); // NOI18N
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
@@ -209,33 +213,44 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
     String nom=txtnombre.getText();
     String genero= (String)cbgenero.getSelectedItem();
     String age=txtedad.getText();
-    String pass=txtpassword.getPassword().toString();
-    if(!txtedad.getText().matches( "\\d{1,2}" ))
-        JOptionPane.showMessageDialog( this, "Debes ingresar tu edad en números enteros y no pueden ser más de 2 digitos!!" ); 
-    else{
-        edad=Integer.parseInt(txtedad.getText());
-        if(genero.equalsIgnoreCase("Masculino"))
-            gen='M';
-        else
-            gen='F';
-        
-         if(numJugador==1){
-            //jugadores[0]=new Jugadores(txtnombre.getText(),edad,gen);
-            escribirArchivo(nom,edad,gen,pass);
-            jLabel1.setText("Jugador No. 2");
-            txtnombre.setText("");
-            txtedad.setText("");
-            cbgenero.setSelectedIndex(0);
-            txtnombre.requestFocus();
-            numJugador=2;
-        }
+    char[] pass2=txtpassword.getPassword();
+    String pass="";
+    for(char x: pass2)
+        pass=pass+""+x;
+    
+    if(!nom.isEmpty() && !genero.isEmpty() && !pass.isEmpty()){
+        if(!txtedad.getText().matches( "\\d{1,2}" ))
+            JOptionPane.showMessageDialog(this, "Debes ingresar tu edad en números enteros y no pueden ser más de 2 digitos!!" ); 
         else{
-            escribirArchivo(nom,edad,gen,pass);
-            PantallaInicio p= new PantallaInicio();
-            p.setVisible(true);
-            this.dispose();
+            edad=Integer.parseInt(txtedad.getText());
+            if(genero.equalsIgnoreCase("Masculino"))
+                gen='M';
+            else
+                gen='F';
+
+             if(numJugador==1){
+                //jugadores[0]=new Jugadores(txtnombre.getText(),edad,gen);
+                escribirArchivo(nom,edad,gen,pass);
+                jLabel1.setText("Jugador No. 2");
+                txtnombre.setText("");
+                txtedad.setText("");
+                txtpassword.setText("");
+                cbgenero.setSelectedIndex(0);
+                txtnombre.requestFocus();
+                numJugador=2;
+            }
+            else{
+                escribirArchivo(nom,edad,gen,pass);
+                PantallaInicio p= new PantallaInicio();
+                p.setVisible(true);
+                this.dispose();
+            }
         }
     }
+    else{
+        JOptionPane.showMessageDialog( this, "No puedes dejar campos vacios!!" );
+    }
+    
     
 }//GEN-LAST:event_jButton1MouseClicked
 
