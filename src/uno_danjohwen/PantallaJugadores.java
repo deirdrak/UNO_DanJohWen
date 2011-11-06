@@ -261,20 +261,34 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
 
              if(numJugador==1){
                 //jugadores[0]=new Jugadores(txtnombre.getText(),edad,gen);
-                escribirArchivo(nom,edad,gen,pass);
-                jLabel1.setText("Jugador No. 2");
-                txtnombre.setText("");
-                txtedad.setText("");
-                txtpassword.setText("");
-                cbgenero.setSelectedIndex(0);
-                txtnombre.requestFocus();
-                numJugador=2;
+                int res=escribirArchivo(nom,edad,gen,pass);
+                
+                if(res==0){
+                    JOptionPane.showMessageDialog(this, "Nombre de Usuario ya existe!!");
+                }
+                else if(res==1){
+                    jLabel1.setText("Jugador No. 2");
+                    txtnombre.setText("");
+                    txtedad.setText("");
+                    txtpassword.setText("");
+                    cbgenero.setSelectedIndex(0);
+                    txtnombre.requestFocus();
+                    numJugador=2;
+                }
+               
             }
             else{
-                escribirArchivo(nom,edad,gen,pass);
-                PantallaInicio p= new PantallaInicio();
-                p.setVisible(true);
-                this.dispose();
+                int res=escribirArchivo(nom,edad,gen,pass);
+                
+                if(res==0){
+                    JOptionPane.showMessageDialog(this, "Nombre de Usuario ya existe!!");
+                }
+                else if(res==1){
+                    PantallaInicio p= new PantallaInicio();
+                    p.setVisible(true);
+                    this.dispose();
+                }
+                
             }
         }
     }
@@ -285,10 +299,11 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
     
 }//GEN-LAST:event_jButton1MouseClicked
 
-public void escribirArchivo(String nom, int edad, char gen, String pass){
+public int escribirArchivo(String nom, int edad, char gen, String pass){
    int cod=1;
    String linea;
-   String dirArchivo="C:\\Jugadores.uno";
+   String path=System.getProperty("user.dir");
+   String dirArchivo=path+"\\Jugadores.uno";
    File archivo= new File(dirArchivo);
    if(archivo.exists()){
        try{
@@ -298,7 +313,13 @@ public void escribirArchivo(String nom, int edad, char gen, String pass){
           while((linea= br.readLine())!=null) {
               if(!linea.isEmpty()){
                   String[]temp=linea.split(";");
-                  cod=Integer.valueOf(temp[0])+1;
+                  String nombre=temp[1];
+                  if(nombre.equalsIgnoreCase(nom)){
+                      return 0;
+                  }
+                  else{
+                      cod=Integer.valueOf(temp[0])+1;
+                  }
               }
               else{
                   break;
@@ -309,9 +330,11 @@ public void escribirArchivo(String nom, int edad, char gen, String pass){
           FileWriter escritura= new FileWriter(dirArchivo,true);
           escritura.write(cod+";"+nom+";"+edad+";"+gen+";"+pass+"\n");
           escritura.close();
+          return 1;
        }
         catch(Exception e){
           JOptionPane.showMessageDialog(this, e); 
+          return 2;
        }
        
    }
@@ -321,9 +344,11 @@ public void escribirArchivo(String nom, int edad, char gen, String pass){
            BufferedWriter bw = new BufferedWriter(new FileWriter(archivo));//Crear archivo de texto
            bw.write(cod+";"+nom+";"+edad+";"+gen+";"+pass+"\n");
            bw.close();
+           return 1;
        }
        catch(Exception e){
            e.getMessage();
+           return 2;
        }
    }
 }

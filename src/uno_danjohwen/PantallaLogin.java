@@ -209,7 +209,8 @@ private Jugadores buscarJugador(String nom, String pass){
    String linea,nombre,password;
    char genero;
    int cod,edad;
-   String dirArchivo="C:\\Jugadores.uno";
+   String path=System.getProperty("user.dir");
+   String dirArchivo=path+"\\Jugadores.uno";
    File archivo= new File(dirArchivo);
    if(archivo.exists()){
        try{
