@@ -16,7 +16,7 @@ public class UNO_DanJohWenApp extends SingleFrameApplication {
      * At startup create and show the main frame of the application.
      */
     @Override protected void startup() {
-        show(new UNO_DanJohWenView(this));
+        show(new PantallaInicio());
     }
 
     /**

@@ -1,92 +1,33 @@
 /*
- * UNO_DanJohWenView.java
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
  */
 
+/*
+ * PantallaJuego.java
+ *
+ * Created on 11-01-2011, 11:31:07 PM
+ */
 package uno_danjohwen;
 
+/**
+ *
+ * @author Wendy
+ */
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.ImageIcon;
-import org.jdesktop.application.Action;
-//import org.jdesktop.application.ResourceMap;
-import org.jdesktop.application.SingleFrameApplication;
-import org.jdesktop.application.FrameView;
-//import org.jdesktop.application.TaskMonitor;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-//import javax.swing.Timer;
-//import javax.swing.Icon;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
+//import javax.swing.JDialog;
+//import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-
-/**
- * The application's main frame.
- */
-public class UNO_DanJohWenView extends FrameView {
+public class PantallaJuego extends javax.swing.JFrame {
     protected ArrayList<Cartas> cards,Player1Cards,Player2Cards;
     protected JLabel CenterCard2;
     protected int turno, posicion;
-    public UNO_DanJohWenView(SingleFrameApplication app) {
-        super(app);
-
+    /** Creates new form PantallaJuego */
+    public PantallaJuego() {
         initComponents();
-
-        // status bar initialization - message timeout, idle icon and busy animation, etc
-//        ResourceMap resourceMap = getResourceMap();
-//        int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
-//        messageTimer = new Timer(messageTimeout, new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                statusMessageLabel.setText("");
-//            }
-//        });
-//        messageTimer.setRepeats(false);
-//        int busyAnimationRate = resourceMap.getInteger("StatusBar.busyAnimationRate");
-//        for (int i = 0; i < busyIcons.length; i++) {
-//            busyIcons[i] = resourceMap.getIcon("StatusBar.busyIcons[" + i + "]");
-//        }
-//        busyIconTimer = new Timer(busyAnimationRate, new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                busyIconIndex = (busyIconIndex + 1) % busyIcons.length;
-//                statusAnimationLabel.setIcon(busyIcons[busyIconIndex]);
-//            }
-//        });
-//        idleIcon = resourceMap.getIcon("StatusBar.idleIcon");
-//        statusAnimationLabel.setIcon(idleIcon);
-//        progressBar.setVisible(false);
-//
-//        // connecting action tasks to status bar via TaskMonitor
-//        TaskMonitor taskMonitor = new TaskMonitor(getApplication().getContext());
-//        taskMonitor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-//            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-//                String propertyName = evt.getPropertyName();
-//                if ("started".equals(propertyName)) {
-//                    if (!busyIconTimer.isRunning()) {
-//                        statusAnimationLabel.setIcon(busyIcons[0]);
-//                        busyIconIndex = 0;
-//                        busyIconTimer.start();
-//                    }
-//                    progressBar.setVisible(true);
-//                    progressBar.setIndeterminate(true);
-//                } else if ("done".equals(propertyName)) {
-//                    busyIconTimer.stop();
-//                    statusAnimationLabel.setIcon(idleIcon);
-//                    progressBar.setVisible(false);
-//                    progressBar.setValue(0);
-//                } else if ("message".equals(propertyName)) {
-//                    String text = (String)(evt.getNewValue());
-//                    statusMessageLabel.setText((text == null) ? "" : text);
-//                    messageTimer.restart();
-//                } else if ("progress".equals(propertyName)) {
-//                    int value = (Integer)(evt.getNewValue());
-//                    progressBar.setVisible(true);
-//                    progressBar.setIndeterminate(false);
-//                    progressBar.setValue(value);
-//                }
-//            }
-//        });
-        
+        this.setExtendedState(this.MAXIMIZED_BOTH);
         cards= ArmarArreglo();
         
         Collections.shuffle(cards);
@@ -110,7 +51,6 @@ public class UNO_DanJohWenView extends FrameView {
         SelectedCardPanel.revalidate();
         CardsPanel.revalidate();
         mainPanel.revalidate();
-     
     }
 
     public static ArrayList ArmarArreglo(){
@@ -176,17 +116,7 @@ public class UNO_DanJohWenView extends FrameView {
             posicion++;
         }
     }
-  
-    @Action
-    public void showAboutBox() {
-        if (aboutBox == null) {
-            JFrame mainFrame = UNO_DanJohWenApp.getApplication().getMainFrame();
-            aboutBox = new UNO_DanJohWenAboutBox(mainFrame);
-            aboutBox.setLocationRelativeTo(mainFrame);
-        }
-        UNO_DanJohWenApp.getApplication().show(aboutBox);
-    }
-
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -204,13 +134,12 @@ public class UNO_DanJohWenView extends FrameView {
         jButton2 = new javax.swing.JButton();
         PlayerTurnPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        menuBar = new javax.swing.JMenuBar();
-        javax.swing.JMenu fileMenu = new javax.swing.JMenu();
-        javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
-        javax.swing.JMenu helpMenu = new javax.swing.JMenu();
-        javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(uno_danjohwen.UNO_DanJohWenApp.class).getContext().getResourceMap(UNO_DanJohWenView.class);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(uno_danjohwen.UNO_DanJohWenApp.class).getContext().getResourceMap(PantallaJuego.class);
+        setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setName("Form"); // NOI18N
+
         mainPanel.setBackground(resourceMap.getColor("mainPanel.background")); // NOI18N
         mainPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         mainPanel.setName("mainPanel"); // NOI18N
@@ -242,7 +171,6 @@ public class UNO_DanJohWenView extends FrameView {
         PlayerTurnPanel.setName("PlayerTurnPanel"); // NOI18N
 
         jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
         javax.swing.GroupLayout PlayerTurnPanelLayout = new javax.swing.GroupLayout(PlayerTurnPanel);
@@ -257,7 +185,7 @@ public class UNO_DanJohWenView extends FrameView {
         PlayerTurnPanelLayout.setVerticalGroup(
             PlayerTurnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlayerTurnPanelLayout.createSequentialGroup()
-                .addContainerGap(122, Short.MAX_VALUE)
+                .addContainerGap(139, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addContainerGap())
         );
@@ -274,63 +202,55 @@ public class UNO_DanJohWenView extends FrameView {
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addComponent(PlayerTurnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                         .addComponent(CenterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(SelectedCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addGap(27, 27, 27))
+                            .addComponent(SelectedCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27))))
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addContainerGap(74, Short.MAX_VALUE)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(SelectedCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(50, 50, 50)
-                                .addComponent(jButton2))
-                            .addComponent(CenterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(PlayerTurnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(mainPanelLayout.createSequentialGroup()
+                            .addComponent(SelectedCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(50, 50, 50)
+                            .addComponent(jButton2))
+                        .addComponent(CenterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PlayerTurnPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(62, 62, 62)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addGap(50, 50, 50))
         );
 
-        menuBar.setName("menuBar"); // NOI18N
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
-        fileMenu.setName("fileMenu"); // NOI18N
-
-        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(uno_danjohwen.UNO_DanJohWenApp.class).getContext().getActionMap(UNO_DanJohWenView.class, this);
-        exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
-        exitMenuItem.setName("exitMenuItem"); // NOI18N
-        fileMenu.add(exitMenuItem);
-
-        menuBar.add(fileMenu);
-
-        helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
-        helpMenu.setName("helpMenu"); // NOI18N
-
-        aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
-        aboutMenuItem.setName("aboutMenuItem"); // NOI18N
-        helpMenu.add(aboutMenuItem);
-
-        menuBar.add(helpMenu);
-
-        setComponent(mainPanel);
-        setMenuBar(menuBar);
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
 // TODO add your handling code here:
-    PantallaInicio p= new PantallaInicio();
-    p.setVisible(true);
+//    PantallaInicio p= new PantallaInicio();
+//    p.setVisible(true);
     
     //Cartas card=cards.get(0);
 //   if(turno==0){
@@ -397,7 +317,42 @@ private void LabelMouseClicked(java.awt.event.MouseEvent evt) {
      CardsPanel.revalidate();
     
 }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PantallaJuego.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PantallaJuego.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PantallaJuego.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PantallaJuego.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
+            public void run() {
+                new PantallaJuego().setVisible(true);
+            }
+        });
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CardsPanel;
     private javax.swing.JPanel CenterPanel;
@@ -407,15 +362,5 @@ private void LabelMouseClicked(java.awt.event.MouseEvent evt) {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
-
-
-//    private final Timer messageTimer;
-//    private final Timer busyIconTimer;
-//    private final Icon idleIcon;
-//    private final Icon[] busyIcons = new Icon[15];
-//    private int busyIconIndex = 0;
-
-    private JDialog aboutBox;
 }
