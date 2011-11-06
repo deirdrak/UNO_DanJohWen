@@ -134,6 +134,7 @@ private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
 
 private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
 // TODO add your handling code here:
+    this.dispose();
 }//GEN-LAST:event_jButton3MouseClicked
 
     /**

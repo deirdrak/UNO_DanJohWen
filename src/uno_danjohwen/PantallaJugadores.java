@@ -49,6 +49,8 @@ public class PantallaJugadores extends javax.swing.JFrame {
         cbgenero = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtpassword = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
@@ -103,6 +105,13 @@ public class PantallaJugadores extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(resourceMap.getFont("jLabel5.font")); // NOI18N
+        jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
+        jLabel5.setName("jLabel5"); // NOI18N
+
+        txtpassword.setText(resourceMap.getString("txtpassword.text")); // NOI18N
+        txtpassword.setName("txtpassword"); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -116,19 +125,21 @@ public class PantallaJugadores extends javax.swing.JFrame {
                         .addGap(82, 82, 82)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(36, 36, 36)
+                                .addComponent(btnAtras))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel4))
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5))
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbgenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtpassword)
                                     .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(35, 35, 35)
-                                .addComponent(btnAtras)))))
+                                    .addComponent(txtnombre, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                                    .addComponent(cbgenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(126, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -146,28 +157,31 @@ public class PantallaJugadores extends javax.swing.JFrame {
                     .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cbgenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(34, 34, 34)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(btnAtras))
-                .addContainerGap(90, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -195,8 +209,9 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
     String nom=txtnombre.getText();
     String genero= (String)cbgenero.getSelectedItem();
     String age=txtedad.getText();
-    if(!txtedad.getText().matches( "\\d{2}" ))
-        JOptionPane.showMessageDialog( this, "Debes ingresar tu edad en números enteros!!" ); 
+    String pass=txtpassword.getPassword().toString();
+    if(!txtedad.getText().matches( "\\d{1,2}" ))
+        JOptionPane.showMessageDialog( this, "Debes ingresar tu edad en números enteros y no pueden ser más de 2 digitos!!" ); 
     else{
         edad=Integer.parseInt(txtedad.getText());
         if(genero.equalsIgnoreCase("Masculino"))
@@ -206,7 +221,7 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         
          if(numJugador==1){
             //jugadores[0]=new Jugadores(txtnombre.getText(),edad,gen);
-            escribirArchivo(nom,edad,gen);
+            escribirArchivo(nom,edad,gen,pass);
             jLabel1.setText("Jugador No. 2");
             txtnombre.setText("");
             txtedad.setText("");
@@ -215,7 +230,7 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
             numJugador=2;
         }
         else{
-            escribirArchivo(nom,edad,gen);
+            escribirArchivo(nom,edad,gen,pass);
             PantallaInicio p= new PantallaInicio();
             p.setVisible(true);
             this.dispose();
@@ -224,7 +239,7 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
     
 }//GEN-LAST:event_jButton1MouseClicked
 
-public void escribirArchivo(String nom, int edad, char gen){
+public void escribirArchivo(String nom, int edad, char gen, String pass){
    int cod=1;
    String linea;
    String dirArchivo="C:\\Jugadores.uno";
@@ -233,17 +248,24 @@ public void escribirArchivo(String nom, int edad, char gen){
        try{
            
           BufferedReader br= new BufferedReader(new FileReader(dirArchivo));
+          
           while((linea= br.readLine())!=null) {
-              cod=linea.charAt(0)+1;
+              if(!linea.isEmpty()){
+                  String[]temp=linea.split(";");
+                  cod=Integer.valueOf(temp[0])+1;
+              }
+              else{
+                  break;
+              }
+              
           }
           
           FileWriter escritura= new FileWriter(dirArchivo,true);
-          escritura.write(cod+";"+nom+";"+edad+";"+gen);
-          escritura.write("\n");
+          escritura.write(cod+";"+nom+";"+edad+";"+gen+";"+pass+"\n");
           escritura.close();
        }
         catch(Exception e){
-           e.getMessage();
+          JOptionPane.showMessageDialog(this, e); 
        }
        
    }
@@ -251,7 +273,7 @@ public void escribirArchivo(String nom, int edad, char gen){
        try
        {
            BufferedWriter bw = new BufferedWriter(new FileWriter(archivo));//Crear archivo de texto
-           bw.write(cod+";"+nom+";"+edad+";"+gen);
+           bw.write(cod+";"+nom+";"+edad+";"+gen+";"+pass+"\n");
            bw.close();
        }
        catch(Exception e){
@@ -311,9 +333,11 @@ private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtedad;
     private javax.swing.JTextField txtnombre;
+    private javax.swing.JPasswordField txtpassword;
     // End of variables declaration//GEN-END:variables
 }
