@@ -24,10 +24,18 @@ public class PantallaJuego extends javax.swing.JFrame {
     protected ArrayList<Cartas> cards,Player1Cards,Player2Cards;
     protected JLabel CenterCard2;
     protected int turno, posicion;
+    protected Jugadores[] jugadores= new Jugadores[2];
+    
     /** Creates new form PantallaJuego */
-    public PantallaJuego() {
+    
+    public PantallaJuego(){
+        
+    }
+    
+    public PantallaJuego(Jugadores[] Players) {
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
+        jugadores=Players;
         cards= ArmarArreglo();
         
         Collections.shuffle(cards);
@@ -38,7 +46,7 @@ public class PantallaJuego extends javax.swing.JFrame {
         ImprimirCartas(Player1Cards);
        
         turno=0;
-        jLabel1.setText("Turno Jugador 1");
+        jLabel1.setText("Turno de "+jugadores[0].Nombre);
         
         Cartas seleccionada=cards.get(0);
         cards.remove(0);
@@ -298,7 +306,7 @@ private void LabelMouseClicked(java.awt.event.MouseEvent evt) {
           SelectedCardPanel.add(CenterCard2);
           //CardsPanel.repaint();
           ImprimirCartas(Player2Cards);
-          jLabel1.setText("Turno Jugador 2");
+          jLabel1.setText("Turno de "+jugadores[1].Nombre);
           turno=1;
     }
     else{
@@ -312,7 +320,7 @@ private void LabelMouseClicked(java.awt.event.MouseEvent evt) {
           //CardsPanel.repaint();
         ImprimirCartas(Player1Cards);
         turno=0;
-        jLabel1.setText("Turno Jugador 1");
+        jLabel1.setText("Turno de "+jugadores[0].Nombre);
     }
      
      SelectedCardPanel.revalidate();
@@ -323,6 +331,7 @@ private void LabelMouseClicked(java.awt.event.MouseEvent evt) {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+       
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

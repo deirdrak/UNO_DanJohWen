@@ -195,7 +195,7 @@ private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
         }
         else{
             jugadores[1]=player;
-            PantallaJuego p= new PantallaJuego();
+            PantallaJuego p= new PantallaJuego(jugadores);
             p.setVisible(true);
             this.dispose();
         }
