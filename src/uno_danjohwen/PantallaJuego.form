@@ -11,6 +11,7 @@
       <Value id="APPLICATION_EXCLUDE"/>
     </Property>
     <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -30,7 +31,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="594" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Component id="mainPanel" alignment="1" max="32767" attributes="0"/>
           </Group>
@@ -38,9 +39,9 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="292" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Component id="mainPanel" alignment="0" max="32767" attributes="0"/>
+              <Component id="mainPanel" alignment="0" pref="292" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,26 +61,34 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
+              <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="jScrollPane1" pref="374" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="PlayerTurnPanel" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="138" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="CenterPanel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="SelectedCardPanel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Component id="ColorChooserPanel" pref="294" max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="PlayerTurnPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="48" max="32767" attributes="0"/>
-                          <Component id="CenterPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="SelectedCardPanel" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" pref="568" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="371" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -87,22 +96,30 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="SelectedCardPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="CenterPanel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="PlayerTurnPanel" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="PlayerTurnPanel" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="1">
+                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="CenterPanel" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="SelectedCardPanel" alignment="1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                          <Component id="ColorChooserPanel" min="-2" pref="80" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -110,6 +127,9 @@
       <SubComponents>
         <Container class="javax.swing.JPanel" name="CenterPanel">
           <Properties>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Cursor de mano"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="CenterPanel" noResource="true"/>
           </Properties>
 
@@ -133,7 +153,7 @@
                 <Property name="alignmentX" type="float" value="7.5"/>
                 <Property name="alignmentY" type="float" value="10.0"/>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor predeterminado"/>
+                  <Color id="Cursor de mano"/>
                 </Property>
                 <Property name="name" type="java.lang.String" value="CardsPanel" noResource="true"/>
               </Properties>
@@ -147,20 +167,14 @@
         </Container>
         <Container class="javax.swing.JPanel" name="SelectedCardPanel">
           <Properties>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Cursor de mano"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="SelectedCardPanel" noResource="true"/>
           </Properties>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
         </Container>
-        <Component class="javax.swing.JButton" name="jButton2">
-          <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jButton2.text"/>
-            <Property name="name" type="java.lang.String" value="jButton2" noResource="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton2MouseClicked"/>
-          </Events>
-        </Component>
         <Container class="javax.swing.JPanel" name="PlayerTurnPanel">
           <Properties>
             <Property name="background" type="java.awt.Color" resourceKey="PlayerTurnPanel.background"/>
@@ -171,18 +185,23 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="73" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="92" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="139" max="32767" attributes="0"/>
+                      <EmptySpace pref="117" max="32767" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -194,8 +213,160 @@
                 <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JLabel" name="jLabel3">
+              <Properties>
+                <Property name="font" type="java.awt.Font" resourceKey="jLabel3.font"/>
+                <Property name="text" type="java.lang.String" resourceKey="jLabel3.text"/>
+                <Property name="name" type="java.lang.String" value="jLabel3" noResource="true"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
+        <Container class="javax.swing.JPanel" name="ColorChooserPanel">
+          <Properties>
+            <Property name="background" type="java.awt.Color" resourceKey="ColorChooserPanel.background"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                <LineBorder roundedCorners="true">
+                  <Property name="color" resourceKey="ColorChooserPanel.border.lineColor"/>
+                </LineBorder>
+              </Border>
+            </Property>
+            <Property name="name" type="java.lang.String" value="ColorChooserPanel" noResource="true"/>
+          </Properties>
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel2" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lblAmarillo" min="-2" pref="60" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblRojo" min="-2" pref="50" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="lblAzul" min="-2" pref="50" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lblVerde" min="-2" pref="50" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblRojo" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="lblAzul" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="lblVerde" min="-2" pref="30" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Component id="lblAmarillo" pref="53" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="font" type="java.awt.Font" resourceKey="jLabel2.font"/>
+                <Property name="text" type="java.lang.String" resourceKey="jLabel2.text"/>
+                <Property name="name" type="java.lang.String" value="jLabel2" noResource="true"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblVerde">
+              <Properties>
+                <Property name="background" type="java.awt.Color" resourceKey="lblVerde.background"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder roundedCorners="true">
+                      <Property name="color" resourceKey="lblVerde.border.lineColor"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="lblVerde" noResource="true"/>
+                <Property name="opaque" type="boolean" value="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblVerdeMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblAmarillo">
+              <Properties>
+                <Property name="background" type="java.awt.Color" resourceKey="lblAmarillo.background"/>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="lblAmarillo.icon"/>
+                <Property name="name" type="java.lang.String" value="lblAmarillo" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblAmarilloMouseClicked"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblRojo">
+              <Properties>
+                <Property name="background" type="java.awt.Color" resourceKey="lblRojo.background"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder roundedCorners="true">
+                      <Property name="color" resourceKey="lblRojo.border.lineColor"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="lblRojo" noResource="true"/>
+                <Property name="opaque" type="boolean" value="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblRojoMouseClicked"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblRojoMouseEntered"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lblAzul">
+              <Properties>
+                <Property name="background" type="java.awt.Color" resourceKey="lblAzul.background"/>
+                <Property name="icon" type="javax.swing.Icon" resourceKey="lblAzul.icon"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder roundedCorners="true">
+                      <Property name="color" resourceKey="lblAzul.border.lineColor"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+                <Property name="name" type="java.lang.String" value="lblAzul" noResource="true"/>
+                <Property name="opaque" type="boolean" value="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblAzulMouseClicked"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+        <Component class="javax.swing.JButton" name="jButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="jButton1.text"/>
+            <Property name="name" type="java.lang.String" value="jButton1" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton2">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="jButton2.text"/>
+            <Property name="name" type="java.lang.String" value="jButton2" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton2MouseClicked"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

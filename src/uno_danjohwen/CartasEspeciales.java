@@ -19,11 +19,11 @@ public class CartasEspeciales extends Cartas {
    public CartasEspeciales(int color,int tipo){
        super(color);
        switch(tipo){
-           case TOMA_DOS: tipoCarta="TOMA_DOS"; break;
-           case REVERSA: tipoCarta="REVERSA"; break;
-           case SALTA: tipoCarta="SALTA";break;
-           case COMODIN_COLOR: tipoCarta="COMODIN_COLOR"; break;
-           case TOMA_CUATRO: tipoCarta="TOMA_CUATRO"; break;
+           case TOMA_DOS: tipoCarta="T"; break;
+           case REVERSA: tipoCarta="R"; break;
+           case SALTA: tipoCarta="S";break;
+           case COMODIN_COLOR: tipoCarta="C"; break;
+           case TOMA_CUATRO: tipoCarta="M"; break;
        }
        Nombre=Color+tipoCarta;
    }

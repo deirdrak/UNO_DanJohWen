@@ -10,9 +10,8 @@
  */
 package uno_danjohwen;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,10 +21,26 @@ import javax.swing.JOptionPane;
 public class PantallaLogin extends javax.swing.JFrame {
     protected int Jugador=1;
     protected Jugadores[] jugadores=new Jugadores[2];
+    private Jugadores j= new Jugadores();
     /** Creates new form PantallaLogin */
     public PantallaLogin() {
         initComponents();
-        this.setLocationRelativeTo(null);
+        
+        this.setLocationRelativeTo(null); 
+        
+        try{
+            ArrayList<Jugadores> players=j.listarJugadores();
+            DefaultListModel modelo = new DefaultListModel();
+            for(Jugadores player:players){                
+                modelo.add(player.Codigo-1, player.Nombre);
+            }
+            PlayersList.setModel(modelo);        
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,"ERROR: "+ e);
+        }
+        
+        
     }
 
     /** This method is called from within the constructor to
@@ -39,13 +54,13 @@ public class PantallaLogin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtuser = new javax.swing.JTextField();
-        txtpass = new javax.swing.JPasswordField();
         btnEntrar = new javax.swing.JButton();
         lblJugador = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        PlayersList = new javax.swing.JList();
+        CrearJugador = new javax.swing.JButton();
+        EliminarJugador = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(uno_danjohwen.UNO_DanJohWenApp.class).getContext().getResourceMap(PantallaLogin.class);
@@ -59,20 +74,6 @@ public class PantallaLogin extends javax.swing.JFrame {
         jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
-
-        jLabel2.setFont(resourceMap.getFont("jLabel2.font")); // NOI18N
-        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
-        jLabel2.setName("jLabel2"); // NOI18N
-
-        jLabel3.setFont(resourceMap.getFont("jLabel3.font")); // NOI18N
-        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
-        jLabel3.setName("jLabel3"); // NOI18N
-
-        txtuser.setText(resourceMap.getString("txtuser.text")); // NOI18N
-        txtuser.setName("txtuser"); // NOI18N
-
-        txtpass.setText(resourceMap.getString("txtpass.text")); // NOI18N
-        txtpass.setName("txtpass"); // NOI18N
 
         btnEntrar.setFont(resourceMap.getFont("btnEntrar.font")); // NOI18N
         btnEntrar.setText(resourceMap.getString("btnEntrar.text")); // NOI18N
@@ -96,38 +97,57 @@ public class PantallaLogin extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
+
+        PlayersList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        PlayersList.setName("PlayersList"); // NOI18N
+        jScrollPane1.setViewportView(PlayersList);
+
+        CrearJugador.setFont(resourceMap.getFont("CrearJugador.font")); // NOI18N
+        CrearJugador.setText(resourceMap.getString("CrearJugador.text")); // NOI18N
+        CrearJugador.setName("CrearJugador"); // NOI18N
+        CrearJugador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CrearJugadorMouseClicked(evt);
+            }
+        });
+
+        EliminarJugador.setFont(resourceMap.getFont("EliminarJugador.font")); // NOI18N
+        EliminarJugador.setText(resourceMap.getString("EliminarJugador.text")); // NOI18N
+        EliminarJugador.setName("EliminarJugador"); // NOI18N
+        EliminarJugador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EliminarJugadorMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(43, 43, 43)
-                        .addComponent(txtuser, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(130, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(btnEntrar)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtpass)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addGap(20, 20, 20)))))
-                .addGap(109, 109, 109))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(183, 183, 183)
-                .addComponent(lblJugador)
-                .addContainerGap(184, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addComponent(jLabel1)
-                .addContainerGap(150, Short.MAX_VALUE))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(EliminarJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton2)
+                                    .addComponent(CrearJugador))
+                                .addGap(19, 19, 19))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(167, 167, 167)
+                        .addComponent(lblJugador)))
+                .addContainerGap(126, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
+                .addGap(114, 114, 114))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,18 +157,19 @@ public class PantallaLogin extends javax.swing.JFrame {
                 .addGap(11, 11, 11)
                 .addComponent(lblJugador)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txtpass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(btnEntrar))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CrearJugador)
+                            .addComponent(btnEntrar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(EliminarJugador)))
+                .addGap(39, 39, 39))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -159,7 +180,7 @@ public class PantallaLogin extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
         );
 
         getAccessibleContext().setAccessibleParent(this);
@@ -177,73 +198,75 @@ private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
 private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEntrarMouseClicked
 // TODO add your handling code here:
     
-    String user= txtuser.getText();
-    char[] pass2=txtpass.getPassword();
-    String pass="";
-    for(char x: pass2)
-        pass=pass+""+x;
-    
-    Jugadores player=buscarJugador(user,pass);
-    
-    if(player!=null){
-        if(Jugador==1){
-            jugadores[0]=player;
-            txtuser.setText("");
-            txtpass.setText("");
+      int cod= PlayersList.getSelectedIndex();
+
+      try{
+          if(Jugador==1){
+            jugadores[0]=j.ObtenerDatosJugador(cod+1);
             lblJugador.setText("Jugador No. 2");
             Jugador=2;
         }
         else{
-            jugadores[1]=player;
+            jugadores[1]=j.ObtenerDatosJugador(cod+1);
             PantallaJuego p= new PantallaJuego(jugadores);
             p.setVisible(true);
             this.dispose();
         }
-    }
-    else{
-        JOptionPane.showMessageDialog(this, "Jugador no encontrado!! Verifique su nombre de Usuario o Contraseña.");
-    }
+      }catch(Exception e){
+          JOptionPane.showMessageDialog(null,"ERROR: "+ e);
+      }
 }//GEN-LAST:event_btnEntrarMouseClicked
 
-private Jugadores buscarJugador(String nom, String pass){
-   String linea,nombre,password;
-   char genero;
-   int cod,edad;
-   String path=System.getProperty("user.dir");
-   String dirArchivo=path+"\\Jugadores.uno";
-   File archivo= new File(dirArchivo);
-   if(archivo.exists()){
-       try{
-           
-          BufferedReader br= new BufferedReader(new FileReader(dirArchivo));
-          
-          while((linea= br.readLine())!=null) {
-              if(!linea.isEmpty()){
-                  String[]temp=linea.split(";");
-                  cod=Integer.valueOf(temp[0]);
-                  nombre=temp[1];
-                  edad=Integer.valueOf(temp[2]);
-                  genero=temp[3].charAt(0);
-                  password=temp[4];
-                  if(nombre.equals(nom)&&password.equals(pass)){
-                      Jugadores jugador=new Jugadores(cod,nombre,edad,genero);
-                      return jugador;
-                  }
-              }
-              else{
-                  break;
-              } 
-          }
-          return null;
-       
-       }
-        catch(Exception e){
-          JOptionPane.showMessageDialog(this, e); 
-       }
-       
-   }
-    return null;
-}
+private void CrearJugadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrearJugadorMouseClicked
+// TODO add your handling code here:
+    PantallaJugadores PJ= new PantallaJugadores();
+    PJ.setVisible(true);
+    this.dispose();
+}//GEN-LAST:event_CrearJugadorMouseClicked
+
+private void EliminarJugadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarJugadorMouseClicked
+// TODO add your handling code here:
+}//GEN-LAST:event_EliminarJugadorMouseClicked
+
+//private Jugadores buscarJugador(String nom, String pass){
+//   String linea,nombre,password;
+//   char genero;
+//   int cod,edad;
+//   String path=System.getProperty("user.dir");
+//   String dirArchivo=path+"\\Jugadores.uno";
+//   File archivo= new File(dirArchivo);
+//   if(archivo.exists()){
+//       try{
+//           
+//          BufferedReader br= new BufferedReader(new FileReader(dirArchivo));
+//          
+//          while((linea= br.readLine())!=null) {
+//              if(!linea.isEmpty()){
+//                  String[]temp=linea.split(";");
+//                  cod=Integer.valueOf(temp[0]);
+//                  nombre=temp[1];
+//                  edad=Integer.valueOf(temp[2]);
+//                  genero=temp[3].charAt(0);
+//                  password=temp[4];
+//                  if(nombre.equals(nom)&&password.equals(pass)){
+//                      Jugadores jugador=new Jugadores(cod,nombre,edad,genero);
+//                      return jugador;
+//                  }
+//              }
+//              else{
+//                  break;
+//              } 
+//          }
+//          return null;
+//       
+//       }
+//        catch(Exception e){
+//          JOptionPane.showMessageDialog(this, e); 
+//       }
+//       
+//   }
+//    return null;
+//}
     /**
      * @param args the command line arguments
      */
@@ -280,14 +303,14 @@ private Jugadores buscarJugador(String nom, String pass){
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CrearJugador;
+    private javax.swing.JButton EliminarJugador;
+    private javax.swing.JList PlayersList;
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblJugador;
-    private javax.swing.JPasswordField txtpass;
-    private javax.swing.JTextField txtuser;
     // End of variables declaration//GEN-END:variables
 }

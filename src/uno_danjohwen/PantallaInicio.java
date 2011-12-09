@@ -10,6 +10,9 @@
  */
 package uno_danjohwen;
 
+import java.awt.Dimension;
+
+
 /**
  *
  * @author Wendy
@@ -18,8 +21,14 @@ public class PantallaInicio extends javax.swing.JFrame {
 
     /** Creates new form PantallaInicio */
     public PantallaInicio() {
+        //this.setSize(300, 400);
         initComponents();
-        this.setExtendedState(this.MAXIMIZED_BOTH);
+        
+        this.setPreferredSize(new Dimension(875,689));
+        this.setMaximumSize(new Dimension(875,689));
+        this.setMinimumSize(new Dimension(875,689));
+        this.setLocationRelativeTo(null);
+              
     }
 
     /** This method is called from within the constructor to
@@ -31,34 +40,25 @@ public class PantallaInicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(uno_danjohwen.UNO_DanJohWenApp.class).getContext().getResourceMap(PantallaInicio.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setAlwaysOnTop(true);
         setBackground(resourceMap.getColor("Form.background")); // NOI18N
+        setMaximizedBounds(new java.awt.Rectangle(0, 0, 700, 551));
         setName("Form"); // NOI18N
-
-        jPanel2.setBackground(resourceMap.getColor("jPanel2.background")); // NOI18N
-        jPanel2.setName("jPanel2"); // NOI18N
+        setResizable(false);
 
         jPanel1.setBackground(resourceMap.getColor("jPanel1.background")); // NOI18N
         jPanel1.setName("jPanel1"); // NOI18N
-
-        jButton1.setBackground(resourceMap.getColor("jButton1.background")); // NOI18N
-        jButton1.setFont(resourceMap.getFont("jButton1.font")); // NOI18N
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jButton1.setName("jButton1"); // NOI18N
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(null);
 
         jButton2.setBackground(resourceMap.getColor("jButton2.background")); // NOI18N
         jButton2.setFont(resourceMap.getFont("jButton2.font")); // NOI18N
@@ -70,6 +70,8 @@ public class PantallaInicio extends javax.swing.JFrame {
                 jButton2MouseClicked(evt);
             }
         });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(150, 110, 170, 51);
 
         jButton3.setBackground(resourceMap.getColor("jButton3.background")); // NOI18N
         jButton3.setFont(resourceMap.getFont("jButton3.font")); // NOI18N
@@ -81,59 +83,43 @@ public class PantallaInicio extends javax.swing.JFrame {
                 jButton3MouseClicked(evt);
             }
         });
+        jPanel1.add(jButton3);
+        jButton3.setBounds(300, 190, 170, 51);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
+        jButton1.setBackground(resourceMap.getColor("jButton1.background")); // NOI18N
+        jButton1.setFont(resourceMap.getFont("jButton1.font")); // NOI18N
+        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
+        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        jButton1.setName("jButton1"); // NOI18N
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jButton1);
+        jButton1.setBounds(0, 10, 170, 51);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(200, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(70, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(resourceMap.getIcon("jLabel1.icon")); // NOI18N
+        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
+        jLabel1.setMaximumSize(new java.awt.Dimension(875, 689));
+        jLabel1.setMinimumSize(new java.awt.Dimension(875, 689));
+        jLabel1.setName("jLabel1"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(120, 120, 120)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(11, 11, 11))
+                .addGap(120, 120, 120)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         getAccessibleContext().setAccessibleParent(this);
@@ -143,8 +129,8 @@ public class PantallaInicio extends javax.swing.JFrame {
 
 private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 // TODO add your handling code here:
-    PantallaLogin PL=new PantallaLogin();
-    PL.setVisible(true);
+    MenuPartidas MP=new MenuPartidas();
+    MP.setVisible(true);
     this.dispose();
 }//GEN-LAST:event_jButton1MouseClicked
 
@@ -196,10 +182,10 @@ private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    javax.swing.JButton jButton1;
+    javax.swing.JButton jButton2;
+    javax.swing.JButton jButton3;
+    javax.swing.JLabel jLabel1;
+    javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

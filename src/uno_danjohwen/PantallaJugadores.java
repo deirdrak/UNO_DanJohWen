@@ -10,8 +10,11 @@
  */
 package uno_danjohwen;
 
-import java.io.*;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import java.awt.image.RenderedImage;
 
 
 /**
@@ -19,9 +22,9 @@ import javax.swing.JOptionPane;
  * @author Wendy
  */
 public class PantallaJugadores extends javax.swing.JFrame {
-
-    protected int numJugador=1;
-    //protected Jugadores jugadores[]= new Jugadores[2];
+    
+    protected Jugadores jugador=new Jugadores();    
+    
     /** Creates new form PantallaJugadores */
     public PantallaJugadores() {
         initComponents();
@@ -49,14 +52,15 @@ public class PantallaJugadores extends javax.swing.JFrame {
         cbgenero = new javax.swing.JComboBox();
         jButton1 = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        txtpassword = new javax.swing.JPasswordField();
-        jPanel3 = new javax.swing.JPanel();
+        PanelFoto = new javax.swing.JPanel();
+        lblfoto = new javax.swing.JLabel();
+        btnsubirfoto = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(uno_danjohwen.UNO_DanJohWenApp.class).getContext().getResourceMap(PantallaJugadores.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setName("Form"); // NOI18N
 
         jPanel1.setBackground(resourceMap.getColor("jPanel1.background")); // NOI18N
@@ -65,33 +69,41 @@ public class PantallaJugadores extends javax.swing.JFrame {
 
         jPanel2.setBackground(resourceMap.getColor("jPanel2.background")); // NOI18N
         jPanel2.setName("jPanel2"); // NOI18N
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
         jLabel1.setForeground(resourceMap.getColor("jLabel1.foreground")); // NOI18N
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
 
         jLabel2.setFont(resourceMap.getFont("jLabel2.font")); // NOI18N
         jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
 
         jLabel3.setFont(resourceMap.getFont("jLabel3.font")); // NOI18N
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
 
         jLabel4.setFont(resourceMap.getFont("jLabel4.font")); // NOI18N
         jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
         jLabel4.setName("jLabel4"); // NOI18N
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, -1));
 
         txtnombre.setText(resourceMap.getString("txtnombre.text")); // NOI18N
         txtnombre.setName("txtnombre"); // NOI18N
+        jPanel2.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 133, -1));
 
         txtedad.setText(resourceMap.getString("txtedad.text")); // NOI18N
         txtedad.setName("txtedad"); // NOI18N
+        jPanel2.add(txtedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 67, -1));
 
         cbgenero.setFont(resourceMap.getFont("cbgenero.font")); // NOI18N
         cbgenero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Femenino" }));
         cbgenero.setName("cbgenero"); // NOI18N
+        jPanel2.add(cbgenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, -1, -1));
 
         jButton1.setFont(resourceMap.getFont("jButton1.font")); // NOI18N
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
@@ -101,6 +113,7 @@ public class PantallaJugadores extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
 
         btnAtras.setFont(resourceMap.getFont("btnAtras.font")); // NOI18N
         btnAtras.setText(resourceMap.getString("btnAtras.text")); // NOI18N
@@ -110,100 +123,46 @@ public class PantallaJugadores extends javax.swing.JFrame {
                 btnAtrasMouseClicked(evt);
             }
         });
+        jPanel2.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
 
-        jLabel5.setFont(resourceMap.getFont("jLabel5.font")); // NOI18N
-        jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
-        jLabel5.setName("jLabel5"); // NOI18N
+        PanelFoto.setBorder(javax.swing.BorderFactory.createLineBorder(resourceMap.getColor("PanelFoto.border.lineColor"))); // NOI18N
+        PanelFoto.setName("PanelFoto"); // NOI18N
 
-        txtpassword.setText(resourceMap.getString("txtpassword.text")); // NOI18N
-        txtpassword.setName("txtpassword"); // NOI18N
+        lblfoto.setText(resourceMap.getString("lblfoto.text")); // NOI18N
+        lblfoto.setName("lblfoto"); // NOI18N
 
-        jPanel3.setName("jPanel3"); // NOI18N
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 124, Short.MAX_VALUE)
+        javax.swing.GroupLayout PanelFotoLayout = new javax.swing.GroupLayout(PanelFoto);
+        PanelFoto.setLayout(PanelFotoLayout);
+        PanelFotoLayout.setHorizontalGroup(
+            PanelFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblfoto, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 117, Short.MAX_VALUE)
+        PanelFotoLayout.setVerticalGroup(
+            PanelFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblfoto, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
         );
+
+        jPanel2.add(PanelFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 51, -1, -1));
+
+        btnsubirfoto.setFont(resourceMap.getFont("btnsubirfoto.font")); // NOI18N
+        btnsubirfoto.setText(resourceMap.getString("btnsubirfoto.text")); // NOI18N
+        btnsubirfoto.setName("btnsubirfoto"); // NOI18N
+        btnsubirfoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnsubirfotoMouseClicked(evt);
+            }
+        });
+        jPanel2.add(btnsubirfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 135, -1));
 
         jButton2.setFont(resourceMap.getFont("jButton2.font")); // NOI18N
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
         jButton2.setName("jButton2"); // NOI18N
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtpassword)
-                            .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtnombre, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                            .addComponent(cbgenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(26, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(36, 36, 36)
-                        .addComponent(btnAtras)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(39, 39, 39))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel1)
-                .addContainerGap(255, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtpassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(cbgenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(btnAtras)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
-                .addContainerGap(71, Short.MAX_VALUE))
-        );
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -211,14 +170,15 @@ public class PantallaJugadores extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -238,129 +198,156 @@ public class PantallaJugadores extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-// TODO add your handling code here:
+
+    // Guardar Jugador
+    
     char gen;
     int edad;
     String nom=txtnombre.getText();
     String genero= (String)cbgenero.getSelectedItem();
-    String age=txtedad.getText();
-    char[] pass2=txtpassword.getPassword();
-    String pass="";
-    for(char x: pass2)
-        pass=pass+""+x;
+    String age=txtedad.getText();    
     
-    if(!nom.isEmpty() && !genero.isEmpty() && !pass.isEmpty()){
+    if(!nom.isEmpty() && !genero.isEmpty()){
         if(!txtedad.getText().matches( "\\d{1,2}" ))
             JOptionPane.showMessageDialog(this, "Debes ingresar tu edad en números enteros y no pueden ser más de 2 digitos!!" ); 
         else{
-            edad=Integer.parseInt(txtedad.getText());
+            edad=Integer.parseInt(txtedad.getText());            
+            
             if(genero.equalsIgnoreCase("Masculino"))
                 gen='M';
             else
                 gen='F';
 
-             if(numJugador==1){
+             
                 //jugadores[0]=new Jugadores(txtnombre.getText(),edad,gen);
-                int res=escribirArchivo(nom,edad,gen,pass);
-                
-                if(res==0){
-                    JOptionPane.showMessageDialog(this, "Nombre de Usuario ya existe!!");
-                }
-                else if(res==1){
-                    jLabel1.setText("Jugador No. 2");
-                    txtnombre.setText("");
-                    txtedad.setText("");
-                    txtpassword.setText("");
-                    cbgenero.setSelectedIndex(0);
-                    txtnombre.requestFocus();
-                    numJugador=2;
-                }
-               
-            }
-            else{
-                int res=escribirArchivo(nom,edad,gen,pass);
-                
-                if(res==0){
-                    JOptionPane.showMessageDialog(this, "Nombre de Usuario ya existe!!");
-                }
-                else if(res==1){
-                    PantallaInicio p= new PantallaInicio();
-                    p.setVisible(true);
-                    this.dispose();
-                }
-                
-            }
-        }
+         try{
+             if(jugador.CrearJugador(nom,edad,gen)){
+                irPantallaLogin();
+             }
+
+         }
+         catch(Exception e){
+             JOptionPane.showMessageDialog(this, "ERROR: "+e.getMessage());
+         }       
+           
+       }
     }
     else{
         JOptionPane.showMessageDialog( this, "No puedes dejar campos vacios!!" );
-    }
-    
+    }    
     
 }//GEN-LAST:event_jButton1MouseClicked
 
-public int escribirArchivo(String nom, int edad, char gen, String pass){
-   int cod=1;
-   String linea;
-   String path=System.getProperty("user.dir");
-   String dirArchivo=path+"\\Jugadores.uno";
-   File archivo= new File(dirArchivo);
-   if(archivo.exists()){
-       try{
-           
-          BufferedReader br= new BufferedReader(new FileReader(dirArchivo));
-          
-          while((linea= br.readLine())!=null) {
-              if(!linea.isEmpty()){
-                  String[]temp=linea.split(";");
-                  String nombre=temp[1];
-                  if(nombre.equalsIgnoreCase(nom)){
-                      return 0;
-                  }
-                  else{
-                      cod=Integer.valueOf(temp[0])+1;
-                  }
-              }
-              else{
-                  break;
-              }
-              
-          }
-          
-          FileWriter escritura= new FileWriter(dirArchivo,true);
-          escritura.write(cod+";"+nom+";"+edad+";"+gen+";"+pass+"\n");
-          escritura.close();
-          return 1;
-       }
-        catch(Exception e){
-          JOptionPane.showMessageDialog(this, e); 
-          return 2;
-       }
-       
-   }
-   else{
-       try
-       {
-           BufferedWriter bw = new BufferedWriter(new FileWriter(archivo));//Crear archivo de texto
-           bw.write(cod+";"+nom+";"+edad+";"+gen+";"+pass+"\n");
-           bw.close();
-           return 1;
-       }
-       catch(Exception e){
-           e.getMessage();
-           return 2;
-       }
-   }
+//public int escribirArchivo(String nom, int edad, char gen, String pass){
+//   int cod=1;
+//   String linea;
+//   String path=System.getProperty("user.dir");
+//   String dirArchivo=path+"\\Jugadores.uno";
+//   File archivo= new File(dirArchivo);
+//   if(archivo.exists()){
+//       try{
+//           
+//          BufferedReader br= new BufferedReader(new FileReader(dirArchivo));
+//          
+//          while((linea= br.readLine())!=null) {
+//              if(!linea.isEmpty()){
+//                  String[]temp=linea.split(";");
+//                  String nombre=temp[1];
+//                  if(nombre.equalsIgnoreCase(nom)){
+//                      return 0;
+//                  }
+//                  else{
+//                      cod=Integer.valueOf(temp[0])+1;
+//                  }
+//              }
+//              else{
+//                  break;
+//              }
+//              
+//          }
+//          
+//          FileWriter escritura= new FileWriter(dirArchivo,true);
+//          escritura.write(cod+";"+nom+";"+edad+";"+gen+";"+pass+"\n");
+//          escritura.close();
+//          return 1;
+//       }
+//        catch(Exception e){
+//          JOptionPane.showMessageDialog(this, e); 
+//          return 2;
+//       }
+//       
+//   }
+//   else{
+//       try
+//       {
+//           BufferedWriter bw = new BufferedWriter(new FileWriter(archivo));//Crear archivo de texto
+//           bw.write(cod+";"+nom+";"+edad+";"+gen+";"+pass+"\n");
+//           bw.close();
+//           return 1;
+//       }
+//       catch(Exception e){
+//           e.getMessage();
+//           return 2;
+//       }
+//   }
+//}
+private void irPantallaLogin(){
+    PantallaLogin p= new PantallaLogin();
+    p.setVisible(true);
+    this.dispose();
 }
 
 private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAtrasMouseClicked
 // TODO add your handling code here:
-     PantallaInicio p= new PantallaInicio();
-        p.setVisible(true);
-        p.setExtendedState(this.MAXIMIZED_BOTH);
-        this.dispose();
+    irPantallaLogin();
 }//GEN-LAST:event_btnAtrasMouseClicked
 
+private void btnsubirfotoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnsubirfotoMouseClicked
+// TODO add your handling code here:
+    ImageIcon foto= this.getFoto();
+    if(foto !=null){
+        this.lblfoto.setIcon(foto);
+        
+    }
+    else{
+        JOptionPane.showMessageDialog(this, "Ocurrio un error");
+    }
+}//GEN-LAST:event_btnsubirfotoMouseClicked
+
+private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+// TODO add your handling code here:
+    
+    PantallaInicio p= new PantallaInicio();
+    p.setVisible(true);
+    this.dispose();
+    
+}//GEN-LAST:event_jButton2MouseClicked
+
+ private ImageIcon getFoto(){
+        JFileChooser chooser= new JFileChooser();
+        
+        chooser.setDialogTitle("Foto Jugador");
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+   
+        int opcion=chooser.showOpenDialog(this);
+        
+        if(opcion==JFileChooser.APPROVE_OPTION){
+            String fotoPath=chooser.getSelectedFile().getAbsolutePath();
+            String fotoName=chooser.getSelectedFile().getName();
+            String ext = chooser.getSelectedFile().getName().substring(chooser.getSelectedFile().getName().lastIndexOf("."));
+            
+            ImageIcon foto= new ImageIcon(fotoPath);
+            RenderedImage imagenR;
+           
+            ImageIcon fotoReal= new ImageIcon(foto.getImage().getScaledInstance(lblfoto.getWidth(), lblfoto.getHeight(), Image.SCALE_DEFAULT));
+            
+            //ImageIO.write(imagenR, ext, new File(fotoName));
+            
+            return fotoReal;
+        }
+        
+        return null;
+    }
     /**
      * @param args the command line arguments
      */
@@ -397,7 +384,9 @@ private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel PanelFoto;
     private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnsubirfoto;
     private javax.swing.JComboBox cbgenero;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -405,12 +394,10 @@ private void btnAtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblfoto;
     private javax.swing.JTextField txtedad;
     private javax.swing.JTextField txtnombre;
-    private javax.swing.JPasswordField txtpassword;
     // End of variables declaration//GEN-END:variables
 }
