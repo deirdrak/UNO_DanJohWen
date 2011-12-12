@@ -22,10 +22,16 @@ import javax.swing.JOptionPane;
  */
 public class PartidasGuardadas extends javax.swing.JFrame {
     File partidas= new File("Partidas");      
-
+    Jugadores[] jugadores=new Jugadores[2];
+    Jugadores[] jugadores2= new Jugadores[2];
     /** Creates new form PartidasGuardadas */
-    public PartidasGuardadas() {
+    public PartidasGuardadas(){
+        
+    }
+    
+    public PartidasGuardadas(Jugadores[] players) {
         initComponents();
+        jugadores=players;       
         if(partidas.isDirectory()){
             File archivos[]=partidas.listFiles();
             DefaultListModel modelo = new DefaultListModel();  
@@ -286,9 +292,24 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
             
             int turno=partida.readInt();
             
-            PantallaJuego PJ= new PantallaJuego( CartasJ1, CartasJ2, CartasCentro, CartaCentro,turno,puntosJ1,puntosJ2);
-            PJ.setVisible(true);
-            this.dispose();
+            if(codJ1==jugadores[0].Codigo || codJ1==jugadores[1].Codigo){
+                if(codJ2==jugadores[0].Codigo || codJ2==jugadores[1].Codigo){
+                    
+                    jugadores2[0]=codJ1==jugadores[0].Codigo?jugadores[0]:jugadores[1];
+                    jugadores2[1]=codJ2==jugadores[0].Codigo?jugadores[0]:jugadores[1];
+                    
+                    PantallaJuego PJ= new PantallaJuego( CartasJ1, CartasJ2, CartasCentro,jugadores2, CartaCentro,turno,puntosJ1,puntosJ2);
+                    PJ.setVisible(true);
+                    this.dispose();
+                }
+                else{
+                 JOptionPane.showMessageDialog(this,"ERROR: La partida no pertenece a los jugadores elegidos!!");
+                }
+            }
+            else{
+                 JOptionPane.showMessageDialog(this,"ERROR: La partida no pertenece a los jugadores elegidos!!");
+            }
+           
             
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,"ERROR: "+ ex);

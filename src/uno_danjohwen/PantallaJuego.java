@@ -15,11 +15,17 @@ package uno_danjohwen;
  * @author Wendy
  */
 
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Timer;
 import javax.swing.ImageIcon;
 //import javax.swing.JDialog;
 //import javax.swing.JFrame;
@@ -37,6 +43,7 @@ public class PantallaJuego extends javax.swing.JFrame {
     private int PuntosJ1=0,PuntosJ2=0;
     private RandomAccessFile rcodPartidas=null;
     private File fl=null;
+    private Timer timer=null;
     
     /** Creates new form PantallaJuego */
     
@@ -44,26 +51,49 @@ public class PantallaJuego extends javax.swing.JFrame {
         
     }
     
-    public PantallaJuego(ArrayList CartasJ1, ArrayList CartasJ2, ArrayList CartasCentrales, String CartaCentro, int turno, int PJ1,int PJ2){
+    public PantallaJuego(ArrayList CartasJ1, ArrayList CartasJ2, ArrayList CartasCentrales, Jugadores[] players,
+            String CartaCentro, int turno, int PJ1,int PJ2){
         initComponents();
+        
+        this.setPreferredSize(new Dimension(875,689));
+        this.setMaximumSize(new Dimension(875,689));
+        this.setMinimumSize(new Dimension(875,689));
+        this.setLocationRelativeTo(null);
+        
+        timer = new Timer (7000, new ActionListener () 
+        {                     
+            public void actionPerformed(ActionEvent e) 
+            { 
+                UNO.setVisible(false);// Aquí el código que queramos ejecutar.
+            } 
+        }); 
         
         PuntosJ1=PJ1;
         PuntosJ2=PJ2;
+        jugadores=players;
         
         this.turno=turno;
         
         ColorChooserPanel.setVisible(false);
+        UNO.setVisible(false);
         
-        this.setExtendedState(this.MAXIMIZED_BOTH);    
+        //this.setExtendedState(this.MAXIMIZED_BOTH);    
         
         Player1Cards=CartasJ1;
         Player2Cards=CartasJ2;
         cards=CartasCentrales;
         
-        if(turno==0)
+        if(turno==0){
             ImprimirCartas(Player1Cards);
-        else
+            jLabel1.setText("Turno de "+jugadores[0].Nombre);
+            jLabel3.setText("Puntos: "+PuntosJ1);
+        }            
+        else{
             ImprimirCartas(Player2Cards);
+            jLabel1.setText("Turno de "+jugadores[1].Nombre);
+            jLabel3.setText("Puntos: "+PuntosJ2);
+        }
+            
         
         JLabel CenterCard= new JLabel(new ImageIcon("00.png"));
         
@@ -90,6 +120,19 @@ public class PantallaJuego extends javax.swing.JFrame {
     public PantallaJuego(Jugadores[] Players) {
         initComponents();
         
+        timer = new Timer (7000, new ActionListener () 
+        {                     
+            public void actionPerformed(ActionEvent e) 
+            { 
+                UNO.setVisible(false);// Aquí el código que queramos ejecutar.
+            } 
+        }); 
+        
+        this.setPreferredSize(new Dimension(875,689));
+        this.setMaximumSize(new Dimension(875,689));
+        this.setMinimumSize(new Dimension(875,689));
+        this.setLocationRelativeTo(null);
+        
         try {
             inicializarCodPartidas();
             fl=new File("Partidas");
@@ -101,8 +144,8 @@ public class PantallaJuego extends javax.swing.JFrame {
         }
         
         ColorChooserPanel.setVisible(false);
-        
-        this.setExtendedState(this.MAXIMIZED_BOTH);       
+        UNO.setVisible(false);
+        //this.setExtendedState(this.MAXIMIZED_BOTH);       
         
         jugadores=Players;
         cards= ArmarArreglo();
@@ -225,7 +268,7 @@ public class PantallaJuego extends javax.swing.JFrame {
            Player1Cards.add(card);
            CardsPanel.removeAll();
            ImprimirCartas(Player2Cards);
-           //jLabel1.setText("Turno de "+jugadores[1].Nombre);
+           jLabel1.setText("Turno de "+jugadores[1].Nombre);
            jLabel3.setText("Puntos: "+PuntosJ2);
            turno=1;
          }
@@ -233,7 +276,7 @@ public class PantallaJuego extends javax.swing.JFrame {
            Player2Cards.add(card);
            CardsPanel.removeAll();
            ImprimirCartas(Player1Cards);
-           //jLabel1.setText("Turno de "+jugadores[0].Nombre);
+           jLabel1.setText("Turno de "+jugadores[0].Nombre);
            jLabel3.setText("Puntos: "+PuntosJ1);
            turno=0;
          }
@@ -270,6 +313,7 @@ public class PantallaJuego extends javax.swing.JFrame {
         lblAzul = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        UNO = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(uno_danjohwen.UNO_DanJohWenApp.class).getContext().getResourceMap(PantallaJuego.class);
@@ -432,6 +476,11 @@ public class PantallaJuego extends javax.swing.JFrame {
             }
         });
 
+        UNO.setFont(resourceMap.getFont("UNO.font")); // NOI18N
+        UNO.setForeground(resourceMap.getColor("UNO.foreground")); // NOI18N
+        UNO.setText(resourceMap.getString("UNO.text")); // NOI18N
+        UNO.setName("UNO"); // NOI18N
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -441,15 +490,17 @@ public class PantallaJuego extends javax.swing.JFrame {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addComponent(PlayerTurnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addComponent(UNO)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                                 .addComponent(CenterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(SelectedCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(60, 60, 60))
                             .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(ColorChooserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)
+                                .addComponent(ColorChooserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                                 .addGap(44, 44, 44))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
@@ -468,10 +519,15 @@ public class PantallaJuego extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addComponent(PlayerTurnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(CenterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SelectedCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(CenterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(SelectedCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addGap(48, 48, 48)
+                                .addComponent(UNO)))
                         .addGap(44, 44, 44)
                         .addComponent(ColorChooserPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -597,7 +653,7 @@ private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
                     }
                 }
             }
-            JOptionPane.showMessageDialog(null,jugadores[1].Nombre + "ha ganado el juego con "+PuntosJ2+" puntos sobre "+jugadores[0].Nombre+" que obtuvo "+PuntosJ1+"puntos!!!");
+            JOptionPane.showMessageDialog(null,jugadores[1].Nombre + " ha ganado el juego con "+PuntosJ2+" puntos sobre "+jugadores[0].Nombre+" que obtuvo "+PuntosJ1+"puntos!!!");
             irAMenuPrincipal();
         }
         else{
@@ -615,7 +671,7 @@ private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
                     }
                 }
             }
-            JOptionPane.showMessageDialog(null,jugadores[0].Nombre + "ha ganado el juego con "+PuntosJ1+" puntos sobre "+jugadores[1].Nombre+" que obtuvo "+PuntosJ2+"puntos!!!");
+            JOptionPane.showMessageDialog(null,jugadores[0].Nombre + " ha ganado el juego con "+PuntosJ1+" puntos sobre "+jugadores[1].Nombre+" que obtuvo "+PuntosJ2+"puntos!!!");
             irAMenuPrincipal();
         }
     }
@@ -637,156 +693,129 @@ private void LabelMouseClicked(java.awt.event.MouseEvent evt) {
         centerCardColor=centerCardName.substring(0, centerCardName.length()-1);  
     }       
      
-    if(turno==0){
-        if(Player1Cards.size()>0){
-            if(PuntosJ1<500){
-                imageName=Player1Cards.get(pos).Nombre;   
+    if(turno==0){            
+        imageName=Player1Cards.get(pos).Nombre;   
 
-                  if(Player1Cards.get(pos) instanceof CartasNumericas){
-                      color=Player1Cards.get(pos).Color;
-                      num=Player1Cards.get(pos).Numero;
+          if(Player1Cards.get(pos) instanceof CartasNumericas){
+              color=Player1Cards.get(pos).Color;
+              num=Player1Cards.get(pos).Numero;
 
-                      try{
-                          centerCardNum=Integer.valueOf(centerCardName.substring(centerCardName.length()-1,centerCardName.length()));
-                          if(centerCardName.equalsIgnoreCase(imageName)|| 
-                              centerCardNum==num || 
-                              centerCardColor.equalsIgnoreCase(color)){
+              try{
+                  centerCardNum=Integer.valueOf(centerCardName.substring(centerCardName.length()-1,centerCardName.length()));
+                  if(centerCardName.equalsIgnoreCase(imageName)|| 
+                      centerCardNum==num || 
+                      centerCardColor.equalsIgnoreCase(color)){
 
-                              CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
-                              CenterCard2.setName(imageName);
-                              PuntosJ1+=num;
+                      CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
+                      CenterCard2.setName(imageName);
+                      PuntosJ1+=num;
 
-                              cambioJugador(pos);
-                          }
-                          else{
-                              JOptionPane.showMessageDialog(null, "Carta Incorrecta!!!");
-                          }
-                      }
-                      catch(Exception ex){
-                          String centerCardTipo=String.valueOf(centerCardName.charAt(centerCardName.length()-1));
-
-                          if(centerCardName.equalsIgnoreCase(imageName)||                       
-                              centerCardColor.equalsIgnoreCase(color)){
-
-                              CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
-                              CenterCard2.setName(imageName);
-                              PuntosJ1+=num;
-                              cambioJugador(pos);
-                          }
-                          else{
-                              JOptionPane.showMessageDialog(null, "Carta Incorrecta!!!");
-                          }
-
-                      }                                 
+                      cambioJugador(pos);
                   }
                   else{
-                      imageName=Player1Cards.get(pos).Nombre;
-                      color=Player1Cards.get(pos).Color;
-                      char tipo=imageName.charAt(imageName.length()-1);
-                      String tipoCarta=String.valueOf(tipo);
-                      String tipoCentro=centerCardName.substring(centerCardName.length()-1);
-
-                      if (validarCartaEspecial(imageName,pos,tipo,tipoCarta,tipoCentro,color,centerCardColor)){
-                          if(tipo=='T'||tipo=='S'||tipo=='R')
-                              PuntosJ1+=20;
-                          else{
-                              PuntosJ1+=50;
-                              //cambioJugador(pos);
-                          }                     
-                      }                      
+                      JOptionPane.showMessageDialog(null, "Carta Incorrecta!!!");
                   }
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null,jugadores[0].Nombre + "ha ganado el juego con "+PuntosJ1+" puntos sobre "+jugadores[1].Nombre+" que obtuvo "+PuntosJ2+"puntos!!!");
-                Player1Cards=null;
-                Player2Cards=null;                    
-            }    
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null,jugadores[0].Nombre + "ha ganado el juego con "+PuntosJ1+" puntos sobre "+jugadores[1].Nombre+" que obtuvo "+PuntosJ2+"puntos!!!");
-            Player1Cards=null;
-            Player2Cards=null;                    
-        }                 
+              }
+              catch(Exception ex){
+                  String centerCardTipo=String.valueOf(centerCardName.charAt(centerCardName.length()-1));
+
+                  if(centerCardName.equalsIgnoreCase(imageName)||                       
+                      centerCardColor.equalsIgnoreCase(color)){
+
+                      CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
+                      CenterCard2.setName(imageName);
+                      PuntosJ1+=num;
+                      cambioJugador(pos);
+                  }
+                  else{
+                      JOptionPane.showMessageDialog(null, "Carta Incorrecta!!!");
+                  }
+
+              }
+
+          }
+          else{
+              imageName=Player1Cards.get(pos).Nombre;
+              color=Player1Cards.get(pos).Color;
+              char tipo=imageName.charAt(imageName.length()-1);
+              String tipoCarta=String.valueOf(tipo);
+              String tipoCentro=centerCardName.substring(centerCardName.length()-1);
+
+              if (validarCartaEspecial(imageName,pos,tipo,tipoCarta,tipoCentro,color,centerCardColor)){
+                  if(tipo=='T'||tipo=='S'||tipo=='R')
+                      PuntosJ1+=20;
+                  else{
+                      PuntosJ1+=50;
+                      //cambioJugador(pos);
+                  }                     
+              }                      
+          }                 
+                  
+//            else
+//            {
+//                JOptionPane.showMessageDialog(null,jugadores[0].Nombre + "ha ganado el juego con "+PuntosJ1+" puntos sobre "+jugadores[1].Nombre+" que obtuvo "+PuntosJ2+"puntos!!!");
+//                Player1Cards=null;
+//                Player2Cards=null;                    
+//            }                 
           
     }
     else{
-        if(Player2Cards.size()>0){
-            if(PuntosJ2<500){         
-            
-                imageName=Player2Cards.get(pos).Nombre;
+                             
+        imageName=Player2Cards.get(pos).Nombre;
 
-                if(Player2Cards.get(pos) instanceof CartasNumericas){
-                      color=Player2Cards.get(pos).Color;
-                      num=Player2Cards.get(pos).Numero;
+        if(Player2Cards.get(pos) instanceof CartasNumericas){
+              color=Player2Cards.get(pos).Color;
+              num=Player2Cards.get(pos).Numero;
 
-                      try{//Si la carta del centro es numerica
-                          centerCardNum=Integer.valueOf(centerCardName.substring(centerCardName.length()-1,centerCardName.length()));
+              try{//Si la carta del centro es numerica
+                  centerCardNum=Integer.valueOf(centerCardName.substring(centerCardName.length()-1,centerCardName.length()));
 
-                          if(centerCardName.equalsIgnoreCase(imageName)|| 
-                                  centerCardNum==num || 
-                                  centerCardColor.equalsIgnoreCase(color)){
+                  if(centerCardName.equalsIgnoreCase(imageName)|| 
+                          centerCardNum==num || 
+                          centerCardColor.equalsIgnoreCase(color)){
 
-                              CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
-                              CenterCard2.setName(imageName);
-                              PuntosJ2+=num;
-                              cambioJugador(pos);                    
-                          }
-                          else{
-                              JOptionPane.showMessageDialog(null, "Carta Incorrecta!!!");
-                          }
-                      }
-                      catch(Exception ex){//Si la carta del centro es especial
-                          String centerCardTipo=String.valueOf(centerCardName.charAt(centerCardName.length()-1));
-
-                          if(centerCardName.equalsIgnoreCase(imageName)||                       
-                              centerCardColor.equalsIgnoreCase(color)){
-
-                              CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
-                              CenterCard2.setName(imageName);
-                              PuntosJ2+=num;
-                              cambioJugador(pos);
-                          }
-                          else{
-                              JOptionPane.showMessageDialog(null, "Carta Incorrecta!!!");
-                          }
-
-                      }              
+                      CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
+                      CenterCard2.setName(imageName);
+                      PuntosJ2+=num;
+                      cambioJugador(pos);                    
                   }
                   else{
-                      imageName=Player2Cards.get(pos).Nombre;
-                      color=Player2Cards.get(pos).Color;
-                      char tipo=imageName.charAt(imageName.length()-1);
-                      String tipoCarta=String.valueOf(tipo);
-                      String tipoCentro=centerCardName.substring(centerCardName.length()-1);
+                      JOptionPane.showMessageDialog(null, "Carta Incorrecta!!!");
+                  }
+              }
+              catch(Exception ex){//Si la carta del centro es especial
+                  String centerCardTipo=String.valueOf(centerCardName.charAt(centerCardName.length()-1));
 
-                      if(validarCartaEspecial(imageName,pos,tipo,tipoCarta,tipoCentro,color,centerCardColor)){
-                          if(tipo=='T'||tipo=='S'||tipo=='R')
-                              PuntosJ2+=20;
-                          else{
-                             PuntosJ2+=50;
-                             //cambioJugador(pos); 
-                          }
+                  if(centerCardName.equalsIgnoreCase(imageName)||                       
+                      centerCardColor.equalsIgnoreCase(color)){
 
-                      }
+                      CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
+                      CenterCard2.setName(imageName);
+                      PuntosJ2+=num;
+                      cambioJugador(pos);
+                  }
+                  else{
+                      JOptionPane.showMessageDialog(null, "Carta Incorrecta!!!");
+                  }
 
-                  } 
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null,jugadores[1].Nombre + "ha ganado el juego con "+PuntosJ2+" puntos sobre "+jugadores[0].Nombre+" que obtuvo "+PuntosJ1+"puntos!!!");
-                Player1Cards=null;
-                Player2Cards=null;                    
-            } 
-            
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null,jugadores[1].Nombre + "ha ganado el juego con "+PuntosJ2+" puntos sobre "+jugadores[0].Nombre+" que obtuvo "+PuntosJ1+"puntos!!!");
-            Player1Cards=null;
-            Player2Cards=null;                    
-        } 
+              }              
+          }
+          else{//Si la carta escogida es Especial
+              imageName=Player2Cards.get(pos).Nombre;
+              color=Player2Cards.get(pos).Color;
+              char tipo=imageName.charAt(imageName.length()-1);
+              String tipoCarta=String.valueOf(tipo);
+              String tipoCentro=centerCardName.substring(centerCardName.length()-1);
+
+              if(validarCartaEspecial(imageName,pos,tipo,tipoCarta,tipoCentro,color,centerCardColor)){
+                  if(tipo=='T'||tipo=='S'||tipo=='R')
+                      PuntosJ2+=20;
+                  else{
+                     PuntosJ2+=50;
+                     //cambioJugador(pos); 
+                  }
+              }
+          }  
 
      }
      CenterCardChangeColor="";
@@ -855,6 +884,7 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
     private javax.swing.JPanel ColorChooserPanel;
     private javax.swing.JPanel PlayerTurnPanel;
     private javax.swing.JPanel SelectedCardPanel;
+    private javax.swing.JButton UNO;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -878,31 +908,20 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
               } 
               CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
               CenterCard2.setName(imageName);
-
-              Player1Cards.remove(pos);
-              //CardsPanel.remove(((JLabel)etiqueta));
-              CardsPanel.removeAll();
-              SelectedCardPanel.removeAll();
-              SelectedCardPanel.add(CenterCard2);
-              //CardsPanel.repaint();
-              ImprimirCartas(Player1Cards);
+              
+              validarTamanhoArregloJ1(pos);
+              
            }
            else{
                for (int i=0;i<2;i++){
                 Cartas card=cards.get(i);
                 Player1Cards.add(card);
                 cards.remove(i);
-              }
-              CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
-              CenterCard2.setName(imageName);
-
-              Player2Cards.remove(pos);
-              //CardsPanel.remove(((JLabel)etiqueta));
-              CardsPanel.removeAll();
-              SelectedCardPanel.removeAll();
-              SelectedCardPanel.add(CenterCard2);
-              //CardsPanel.repaint();
-              ImprimirCartas(Player2Cards);
+               }
+               CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
+               CenterCard2.setName(imageName);
+               
+               validarTamanhoArregloJ2(pos);
            }
         }
         else{
@@ -912,35 +931,23 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
     
     public void reversaPierdeTurno(String imageName, int pos){
         if(turno==0){
-
               CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
               CenterCard2.setName(imageName);
 
-              Player1Cards.remove(pos);
-              //CardsPanel.remove(((JLabel)etiqueta));
-              CardsPanel.removeAll();
-              SelectedCardPanel.removeAll();
-              SelectedCardPanel.add(CenterCard2);
-              //CardsPanel.repaint();
-              ImprimirCartas(Player1Cards);
+              validarTamanhoArregloJ1(pos);
            }
            else{
                
               CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
               CenterCard2.setName(imageName);
 
-              Player2Cards.remove(pos);
-              //CardsPanel.remove(((JLabel)etiqueta));
-              CardsPanel.removeAll();
-              SelectedCardPanel.removeAll();
-              SelectedCardPanel.add(CenterCard2);
-              //CardsPanel.repaint();
-              ImprimirCartas(Player2Cards);
+              validarTamanhoArregloJ2(pos);
            }
     }
     
     public void agregar4Cartas(String imageName, int pos){
         if(cards.size()>0){
+            ColorChooserPanel.setVisible(true);
            if(turno==0){
               for (int i=0;i<4;i++){
                 Cartas card=cards.get(i);
@@ -950,14 +957,7 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
               CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
               CenterCard2.setName(imageName);
 
-              Player1Cards.remove(pos);
-              //CardsPanel.remove(((JLabel)etiqueta));
-              CardsPanel.removeAll();
-              SelectedCardPanel.removeAll();
-              SelectedCardPanel.add(CenterCard2);
-              //CardsPanel.repaint();
-              ImprimirCartas(Player1Cards);
-              ColorChooserPanel.setVisible(true);
+              validarTamanhoArregloJ1(pos);        
            }
            else{
                for (int i=0;i<4;i++){
@@ -968,14 +968,7 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
               CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
               CenterCard2.setName(imageName);
 
-              Player2Cards.remove(pos);
-              //CardsPanel.remove(((JLabel)etiqueta));
-              CardsPanel.removeAll();
-              SelectedCardPanel.removeAll();
-              SelectedCardPanel.add(CenterCard2);
-              //CardsPanel.repaint();
-              ImprimirCartas(Player2Cards);
-              ColorChooserPanel.setVisible(true);
+             validarTamanhoArregloJ2(pos);
            }
         }
         else{
@@ -985,63 +978,131 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
     
     public void cambioColor(String imageName, int pos){
         ColorChooserPanel.setVisible(true);
-        if(turno==0){                            
-              CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
-              CenterCard2.setName(imageName);
+                               
+        CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
+        CenterCard2.setName(imageName);
+        cambioJugador(pos);
 
-              Player1Cards.remove(pos);
-              //CardsPanel.remove(((JLabel)etiqueta));
-              CardsPanel.removeAll();
-              SelectedCardPanel.removeAll();
-              SelectedCardPanel.add(CenterCard2);
-              //CardsPanel.repaint();
-              ImprimirCartas(Player2Cards);
-              jLabel1.setText("Turno de "+jugadores[1].Nombre);
-              jLabel3.setText("Puntos: "+PuntosJ2);
-              turno=1;
-           }
-           else{              
-              CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
-              CenterCard2.setName(imageName);
+//              Player1Cards.remove(pos);
+//              //CardsPanel.remove(((JLabel)etiqueta));
+//              CardsPanel.removeAll();
+//              SelectedCardPanel.removeAll();
+//              SelectedCardPanel.add(CenterCard2);
+//              //CardsPanel.repaint();
+//              ImprimirCartas(Player2Cards);
+//              jLabel1.setText("Turno de "+jugadores[1].Nombre);
+//              jLabel3.setText("Puntos: "+PuntosJ2);
+//              turno=1;
+//           }
+//           else{              
+//              CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
+//              CenterCard2.setName(imageName);
+//              cambioJugador(pos);
 
-              Player2Cards.remove(pos);
-              //CardsPanel.remove(((JLabel)etiqueta));
-              CardsPanel.removeAll();
-              SelectedCardPanel.removeAll();
-              SelectedCardPanel.add(CenterCard2);
-              //CardsPanel.repaint();
-              ImprimirCartas(Player1Cards);
-              jLabel1.setText("Turno de "+jugadores[0].Nombre);
-              jLabel3.setText("Puntos: "+PuntosJ1);
-              turno=0;
-           }
+//              Player2Cards.remove(pos);
+//              //CardsPanel.remove(((JLabel)etiqueta));
+//              CardsPanel.removeAll();
+//              SelectedCardPanel.removeAll();
+//              SelectedCardPanel.add(CenterCard2);
+//              //CardsPanel.repaint();
+//              ImprimirCartas(Player1Cards);
+//              jLabel1.setText("Turno de "+jugadores[0].Nombre);
+//              jLabel3.setText("Puntos: "+PuntosJ1);
+//              turno=0;
+//           }
     }
     
     private void cambioJugador(int pos){
         if(turno==0){
-            Player1Cards.remove(pos);
-            //CardsPanel.remove(((JLabel)etiqueta));
-            CardsPanel.removeAll();
-            SelectedCardPanel.removeAll();
-            SelectedCardPanel.add(CenterCard2);
-            //CardsPanel.repaint();
-            ImprimirCartas(Player2Cards);
-            jLabel1.setText("Turno de "+jugadores[1].Nombre);
-            jLabel3.setText("Puntos: "+PuntosJ2);
-            turno=1;     
+            if((Player1Cards.size()-1)==0){
+                
+                for(Cartas c:Player2Cards){
+                    if(c instanceof CartasNumericas)
+                        PuntosJ1+=c.Numero;
+                    else{
+                        String type=((CartasEspeciales)c).tipoCarta;
+                        char tipo=type.charAt(0);
+                        if(tipo=='T'||tipo=='S'||tipo=='R')
+                            PuntosJ1+=20;
+                        else
+                            PuntosJ1+=50; 
+                    }
+                    
+                }
+                JOptionPane.showMessageDialog(null,jugadores[0].Nombre + " ha ganado el juego con "+PuntosJ1+" puntos sobre "+jugadores[1].Nombre+" que obtuvo "+PuntosJ2+" puntos!!!");
+                Player1Cards=null;
+                Player2Cards=null;    
+                irAMenuPrincipal();
+            }
+            else if((Player1Cards.size()-1)==1){               
+                UNO.setVisible(true);
+                timer.start();
+                
+                
+            }
+            else{
+                Player1Cards.remove(pos);
+                //CardsPanel.remove(((JLabel)etiqueta));
+                CardsPanel.removeAll();
+                SelectedCardPanel.removeAll();
+                SelectedCardPanel.add(CenterCard2);
+                //CardsPanel.repaint();
+                ImprimirCartas(Player2Cards);
+                jLabel1.setText("Turno de "+jugadores[1].Nombre);
+                jLabel3.setText("Puntos: "+PuntosJ2);
+                turno=1;  
+            }
         }
         else
         {
-            Player2Cards.remove(pos);
-            //CardsPanel.remove(((JLabel)etiqueta));
-            CardsPanel.removeAll();
-            SelectedCardPanel.removeAll();
-            SelectedCardPanel.add(CenterCard2);
-            //CardsPanel.repaint();
-            ImprimirCartas(Player1Cards);
-            jLabel1.setText("Turno de "+jugadores[0].Nombre);
-            jLabel3.setText("Puntos: "+PuntosJ1);
-            turno=0;
+              if((Player2Cards.size()-1)==0){                              
+                  
+                  for(Cartas c:Player1Cards){
+                    if(c instanceof CartasNumericas)
+                        PuntosJ2+=c.Numero;
+                    else{
+                        String type=((CartasEspeciales)c).tipoCarta;
+                        char tipo=type.charAt(0);
+                        if(tipo=='T'||tipo=='S'||tipo=='R')
+                            PuntosJ2+=20;
+                        else
+                            PuntosJ2+=50; 
+                    }
+
+                  }
+                  JOptionPane.showMessageDialog(null,jugadores[1].Nombre + " ha ganado el juego con "+PuntosJ2+" puntos sobre "+jugadores[0].Nombre+" que obtuvo "+PuntosJ1+" puntos!!!");
+                  Player1Cards=null;
+                  Player2Cards=null;  
+                  irAMenuPrincipal();
+              }
+              else if((Player2Cards.size()-1)==1){
+                  UNO.setVisible(true);
+                  timer.start();
+                  Player2Cards.remove(pos);
+                  //CardsPanel.remove(((JLabel)etiqueta));
+                  CardsPanel.removeAll();
+                  SelectedCardPanel.removeAll();
+                  SelectedCardPanel.add(CenterCard2);
+                  //CardsPanel.repaint();
+                  ImprimirCartas(Player1Cards);
+                  jLabel1.setText("Turno de "+jugadores[0].Nombre);
+                  jLabel3.setText("Puntos: "+PuntosJ1);
+                  turno=0;
+
+              }
+              else {
+                    Player2Cards.remove(pos);
+                    //CardsPanel.remove(((JLabel)etiqueta));
+                    CardsPanel.removeAll();
+                    SelectedCardPanel.removeAll();
+                    SelectedCardPanel.add(CenterCard2);
+                    //CardsPanel.repaint();
+                    ImprimirCartas(Player1Cards);
+                    jLabel1.setText("Turno de "+jugadores[0].Nombre);
+                    jLabel3.setText("Puntos: "+PuntosJ1);
+                    turno=0;
+              }
+            
         }
     }
 
@@ -1109,6 +1170,94 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
         PantallaInicio PI= new PantallaInicio();
         PI.setVisible(true);
         this.dispose();
+    }
+    
+    private void validarTamanhoArregloJ1(int pos){
+        if((Player1Cards.size()-1)==0){
+                
+                for(Cartas c:Player2Cards){
+                    if(c instanceof CartasNumericas)
+                        PuntosJ1+=c.Numero;
+                    else{
+                        String type=((CartasEspeciales)c).tipoCarta;
+                        char tipo=type.charAt(0);
+                        if(tipo=='T'||tipo=='S'||tipo=='R')
+                            PuntosJ1+=20;
+                        else
+                            PuntosJ1+=50; 
+                    }                    
+                }
+                JOptionPane.showMessageDialog(null,jugadores[0].Nombre + " ha ganado el juego con "+PuntosJ1+" puntos sobre "+jugadores[1].Nombre+" que obtuvo "+PuntosJ2+" puntos!!!");
+                Player1Cards=null;
+                Player2Cards=null;    
+                irAMenuPrincipal();
+             }
+             else if((Player1Cards.size()-1)==1){               
+                UNO.setVisible(true);
+//                
+//
+                timer.start();
+//               
+//                UNO.setVisible(false);
+                Player1Cards.remove(pos);
+                CardsPanel.removeAll();
+                SelectedCardPanel.removeAll();
+                SelectedCardPanel.add(CenterCard2);
+                //CardsPanel.repaint();
+                ImprimirCartas(Player1Cards);
+                jLabel3.setText("Puntos: "+PuntosJ1);
+             }
+             else{              
+                Player1Cards.remove(pos);
+                //CardsPanel.remove(((JLabel)etiqueta));
+                CardsPanel.removeAll();
+                SelectedCardPanel.removeAll();
+                SelectedCardPanel.add(CenterCard2);
+                //CardsPanel.repaint();
+                ImprimirCartas(Player1Cards);
+                jLabel3.setText("Puntos: "+PuntosJ1);
+             }
+    }
+    
+    private void validarTamanhoArregloJ2(int pos){
+        if((Player2Cards.size()-1)==0){           
+                  for(Cartas c:Player1Cards){
+                    if(c instanceof CartasNumericas)
+                        PuntosJ2+=c.Numero;
+                    else{
+                        String type=((CartasEspeciales)c).tipoCarta;
+                        char tipo=type.charAt(0);
+                        if(tipo=='T'||tipo=='S'||tipo=='R')
+                            PuntosJ2+=20;
+                        else
+                            PuntosJ2+=50; 
+                    }
+                    
+                  }
+                  JOptionPane.showMessageDialog(null,jugadores[1].Nombre + " ha ganado el juego con "+PuntosJ2+" puntos sobre "+jugadores[0].Nombre+" que obtuvo "+PuntosJ1+" puntos!!!");
+                  Player1Cards=null;
+                  Player2Cards=null;  
+                  irAMenuPrincipal();
+               }
+               else if((Player2Cards.size()-1)==1){
+                  UNO.setVisible(true);
+//                                    
+                timer.start();
+//                UNO.setVisible(false);
+
+                  
+               }
+               else {                  
+
+                  Player2Cards.remove(pos);
+                  //CardsPanel.remove(((JLabel)etiqueta));
+                  CardsPanel.removeAll();
+                  SelectedCardPanel.removeAll();
+                  SelectedCardPanel.add(CenterCard2);
+                  //CardsPanel.repaint();
+                  ImprimirCartas(Player2Cards);
+                  jLabel3.setText("Puntos: "+PuntosJ2);
+               }
     }
     
     class players{

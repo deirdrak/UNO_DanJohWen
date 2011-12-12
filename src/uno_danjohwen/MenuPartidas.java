@@ -21,6 +21,7 @@ public class MenuPartidas extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -100,7 +101,7 @@ public class MenuPartidas extends javax.swing.JFrame {
 
 private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
 // TODO add your handling code here:
-    PantallaLogin PL= new PantallaLogin();
+    PantallaLogin PL= new PantallaLogin(0);
     PL.setVisible(true);
     this.dispose();
 }//GEN-LAST:event_jButton2MouseClicked
@@ -114,8 +115,8 @@ private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
 
 private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
 // TODO add your handling code here:
-    PartidasGuardadas PG= new PartidasGuardadas();
-    PG.setVisible(true);
+    PantallaLogin PL= new PantallaLogin(1);
+    PL.setVisible(true);
     this.dispose();
 }//GEN-LAST:event_jButton1MouseClicked
 

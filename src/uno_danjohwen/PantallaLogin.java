@@ -22,15 +22,22 @@ public class PantallaLogin extends javax.swing.JFrame {
     protected int Jugador=1;
     protected Jugadores[] jugadores=new Jugadores[2];
     private Jugadores j= new Jugadores();
-    /** Creates new form PantallaLogin */
-    public PantallaLogin() {
-        initComponents();
+    DefaultListModel modelo = null;
+    private int pantalla;
+    
+    public PantallaLogin(){
         
+    }
+    /** Creates new form PantallaLogin */
+    public PantallaLogin(int pantalla) {
+        initComponents();
+        this.pantalla=pantalla;
+        modelo=new DefaultListModel();
         this.setLocationRelativeTo(null); 
         
         try{
             ArrayList<Jugadores> players=j.listarJugadores();
-            DefaultListModel modelo = new DefaultListModel();
+            
             for(Jugadores player:players){                
                 modelo.add(player.Codigo-1, player.Nombre);
             }
@@ -70,10 +77,13 @@ public class PantallaLogin extends javax.swing.JFrame {
 
         jPanel1.setBackground(resourceMap.getColor("jPanel1.background")); // NOI18N
         jPanel1.setName("jPanel1"); // NOI18N
+        jPanel1.setLayout(null);
 
         jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(130, 10, 217, 29);
 
         btnEntrar.setFont(resourceMap.getFont("btnEntrar.font")); // NOI18N
         btnEntrar.setText(resourceMap.getString("btnEntrar.text")); // NOI18N
@@ -83,10 +93,14 @@ public class PantallaLogin extends javax.swing.JFrame {
                 btnEntrarMouseClicked(evt);
             }
         });
+        jPanel1.add(btnEntrar);
+        btnEntrar.setBounds(132, 256, 87, 25);
 
         lblJugador.setFont(resourceMap.getFont("lblJugador.font")); // NOI18N
         lblJugador.setText(resourceMap.getString("lblJugador.text")); // NOI18N
         lblJugador.setName("lblJugador"); // NOI18N
+        jPanel1.add(lblJugador);
+        lblJugador.setBounds(167, 51, 86, 15);
 
         jButton2.setFont(resourceMap.getFont("jButton2.font")); // NOI18N
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
@@ -96,12 +110,20 @@ public class PantallaLogin extends javax.swing.JFrame {
                 jButton2MouseClicked(evt);
             }
         });
+        jPanel1.add(jButton2);
+        jButton2.setBounds(239, 287, 69, 25);
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
+        PlayersList.setBackground(resourceMap.getColor("PlayersList.background")); // NOI18N
+        PlayersList.setFont(resourceMap.getFont("PlayersList.font")); // NOI18N
         PlayersList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         PlayersList.setName("PlayersList"); // NOI18N
+        PlayersList.setOpaque(false);
         jScrollPane1.setViewportView(PlayersList);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(120, 80, 197, 154);
 
         CrearJugador.setFont(resourceMap.getFont("CrearJugador.font")); // NOI18N
         CrearJugador.setText(resourceMap.getString("CrearJugador.text")); // NOI18N
@@ -111,6 +133,8 @@ public class PantallaLogin extends javax.swing.JFrame {
                 CrearJugadorMouseClicked(evt);
             }
         });
+        jPanel1.add(CrearJugador);
+        CrearJugador.setBounds(237, 256, 71, 25);
 
         EliminarJugador.setFont(resourceMap.getFont("EliminarJugador.font")); // NOI18N
         EliminarJugador.setText(resourceMap.getString("EliminarJugador.text")); // NOI18N
@@ -120,63 +144,14 @@ public class PantallaLogin extends javax.swing.JFrame {
                 EliminarJugadorMouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(130, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(btnEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(EliminarJugador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton2)
-                                    .addComponent(CrearJugador))
-                                .addGap(19, 19, 19))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
-                        .addComponent(lblJugador)))
-                .addContainerGap(126, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-                .addGap(114, 114, 114))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(11, 11, 11)
-                .addComponent(lblJugador)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CrearJugador)
-                            .addComponent(btnEntrar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(EliminarJugador)))
-                .addGap(39, 39, 39))
-        );
+        jPanel1.add(EliminarJugador);
+        EliminarJugador.setBounds(132, 285, 87, 25);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,14 +178,28 @@ private void btnEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
       try{
           if(Jugador==1){
             jugadores[0]=j.ObtenerDatosJugador(cod+1);
+            //modelo.removeElementAt(cod);            
             lblJugador.setText("Jugador No. 2");
             Jugador=2;
         }
         else{
             jugadores[1]=j.ObtenerDatosJugador(cod+1);
-            PantallaJuego p= new PantallaJuego(jugadores);
-            p.setVisible(true);
-            this.dispose();
+            if(jugadores[0].Codigo!=jugadores[1].Codigo){
+                if(pantalla==0){//Nueva Partida
+                    PantallaJuego p= new PantallaJuego(jugadores);
+                    p.setVisible(true);
+                    this.dispose();
+                }
+                else{
+                    PartidasGuardadas p= new PartidasGuardadas(jugadores);
+                    p.setVisible(true);
+                    this.dispose();
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null,"ERROR: Jugador ya ha sido seleccionado!");
+            }
+            
         }
       }catch(Exception e){
           JOptionPane.showMessageDialog(null,"ERROR: "+ e);
@@ -226,6 +215,15 @@ private void CrearJugadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
 
 private void EliminarJugadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EliminarJugadorMouseClicked
 // TODO add your handling code here:
+    int cod= PlayersList.getSelectedIndex();
+    try{
+        j.EliminarJugador(cod);
+    }
+    catch(Exception e){
+        JOptionPane.showMessageDialog(null,"ERROR: "+ e);
+    }
+    
+    
 }//GEN-LAST:event_EliminarJugadorMouseClicked
 
 //private Jugadores buscarJugador(String nom, String pass){
