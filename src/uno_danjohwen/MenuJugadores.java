@@ -149,7 +149,7 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
 private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
     
     //Eliminar Jugador
-    PantallaLogin PL= new PantallaLogin();
+    PantallaLogin PL= new PantallaLogin(1);
     PL.setVisible(true);
     this.dispose(); 
 }//GEN-LAST:event_jButton3MouseClicked

@@ -26,7 +26,7 @@ public class PantallaLogin extends javax.swing.JFrame {
     private int pantalla;
     
     public PantallaLogin(){
-       
+      
     }
     /** Creates new form PantallaLogin */
     public PantallaLogin(int pantalla) {
@@ -45,8 +45,7 @@ public class PantallaLogin extends javax.swing.JFrame {
         }
         catch(Exception e){
             JOptionPane.showMessageDialog(null,"ERROR: "+ e);
-        }
-        
+        }       
         
     }
 
