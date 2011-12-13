@@ -350,8 +350,9 @@ public class PantallaJuego extends javax.swing.JFrame {
 
         CenterPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         CenterPanel.setName("CenterPanel"); // NOI18N
+        CenterPanel.setLayout(new java.awt.GridLayout());
         mainPanel.add(CenterPanel);
-        CenterPanel.setBounds(630, 230, 92, 152);
+        CenterPanel.setBounds(630, 230, 100, 160);
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
@@ -365,12 +366,13 @@ public class PantallaJuego extends javax.swing.JFrame {
         jScrollPane1.setViewportView(CardsPanel);
 
         mainPanel.add(jScrollPane1);
-        jScrollPane1.setBounds(160, 520, 568, 160);
+        jScrollPane1.setBounds(118, 520, 650, 160);
 
         SelectedCardPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         SelectedCardPanel.setName("SelectedCardPanel"); // NOI18N
+        SelectedCardPanel.setLayout(new java.awt.GridLayout());
         mainPanel.add(SelectedCardPanel);
-        SelectedCardPanel.setBounds(740, 230, 92, 152);
+        SelectedCardPanel.setBounds(740, 230, 100, 160);
 
         PlayerTurnPanel.setBackground(resourceMap.getColor("PlayerTurnPanel.background")); // NOI18N
         PlayerTurnPanel.setName("PlayerTurnPanel"); // NOI18N
@@ -524,7 +526,7 @@ public class PantallaJuego extends javax.swing.JFrame {
             }
         });
         mainPanel.add(UNO);
-        UNO.setBounds(760, 560, 69, 25);
+        UNO.setBounds(690, 450, 69, 25);
 
         jLabel4.setIcon(resourceMap.getIcon("jLabel4.icon")); // NOI18N
         jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
@@ -892,20 +894,20 @@ private void LabelMouseClicked(java.awt.event.MouseEvent evt) {
 }
 
 private void LabelMouseEntered(java.awt.event.MouseEvent evt) {
-    Object etiqueta=evt.getSource();
-    JLabel label=(JLabel)etiqueta;
-    Border Lborder = LineBorder.createBlackLineBorder();
-    label.setBorder(Lborder);
-    //label.setOpaque(true);
-    label.revalidate();
+//    Object etiqueta=evt.getSource();
+//    JLabel label=(JLabel)etiqueta;
+//    Border Lborder = LineBorder.createBlackLineBorder();
+//    label.setBorder(Lborder);
+//    //label.setOpaque(true);
+//    label.revalidate();
 }
 
 private void LabelMouseExited(java.awt.event.MouseEvent evt) {
-    Object etiqueta=evt.getSource();
-    JLabel label=(JLabel)etiqueta;    
-    label.setBorder(null);
-    //label.setOpaque(true);
-    label.revalidate();
+//    Object etiqueta=evt.getSource();
+//    JLabel label=(JLabel)etiqueta;    
+//    label.setBorder(null);
+//    //label.setOpaque(true);
+//    label.revalidate();
 }
 
     /**

@@ -74,6 +74,7 @@ public class PantallaLogin extends javax.swing.JFrame {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(uno_danjohwen.UNO_DanJohWenApp.class).getContext().getResourceMap(PantallaLogin.class);
         setTitle(resourceMap.getString("Form.title")); // NOI18N
         setBackground(resourceMap.getColor("Form.background")); // NOI18N
+        setMinimumSize(new java.awt.Dimension(535, 334));
         setName("Form"); // NOI18N
 
         jPanel1.setBackground(resourceMap.getColor("jPanel1.background")); // NOI18N
