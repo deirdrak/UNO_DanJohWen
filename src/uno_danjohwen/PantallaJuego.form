@@ -129,7 +129,7 @@
                       <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -384,6 +384,9 @@
             <Property name="text" type="java.lang.String" resourceKey="UNO.text"/>
             <Property name="name" type="java.lang.String" value="UNO" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="UNOMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

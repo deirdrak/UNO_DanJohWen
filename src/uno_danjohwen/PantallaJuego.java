@@ -23,8 +23,6 @@ import java.io.File;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 //import javax.swing.JDialog;
@@ -35,16 +33,19 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 public class PantallaJuego extends javax.swing.JFrame {
+    
     protected static ArrayList<Cartas> cards,Player1Cards,Player2Cards;
     protected static JLabel CenterCard2;
     protected static int turno, posicion;
     protected static Jugadores[] jugadores= new Jugadores[2];
-    protected String CenterCardChangeColor="";
+    protected String CenterCardChangeColor="",resultado="",nomArchivo="";
     private int PuntosJ1=0,PuntosJ2=0;
     private RandomAccessFile rcodPartidas=null;
     private File fl=null;
     private Timer timer=null;
-    
+    private boolean castigo=true;
+    private Jugadores j= new Jugadores();
+    private Historial h=new Historial();
     /** Creates new form PantallaJuego */
     
     public PantallaJuego(){
@@ -52,7 +53,7 @@ public class PantallaJuego extends javax.swing.JFrame {
     }
     
     public PantallaJuego(ArrayList CartasJ1, ArrayList CartasJ2, ArrayList CartasCentrales, Jugadores[] players,
-            String CartaCentro, int turno, int PJ1,int PJ2){
+            String CartaCentro, int turno, int PJ1,int PJ2,String nombreArch){
         initComponents();
         
         this.setPreferredSize(new Dimension(875,689));
@@ -60,20 +61,20 @@ public class PantallaJuego extends javax.swing.JFrame {
         this.setMinimumSize(new Dimension(875,689));
         this.setLocationRelativeTo(null);
         
-        timer = new Timer (7000, new ActionListener () 
+        timer = new Timer (3000, new ActionListener () 
         {                     
             public void actionPerformed(ActionEvent e) 
             { 
-                UNO.setVisible(false);// Aquí el código que queramos ejecutar.
+                UNO.setVisible(false);
             } 
         }); 
         
         PuntosJ1=PJ1;
         PuntosJ2=PJ2;
         jugadores=players;
-        
+        nomArchivo=nombreArch;
         this.turno=turno;
-        
+        fl=new File("Partidas\\"+nomArchivo);
         ColorChooserPanel.setVisible(false);
         UNO.setVisible(false);
         
@@ -120,7 +121,7 @@ public class PantallaJuego extends javax.swing.JFrame {
     public PantallaJuego(Jugadores[] Players) {
         initComponents();
         
-        timer = new Timer (7000, new ActionListener () 
+        timer = new Timer (3000, new ActionListener () 
         {                     
             public void actionPerformed(ActionEvent e) 
             { 
@@ -132,7 +133,7 @@ public class PantallaJuego extends javax.swing.JFrame {
         this.setMaximumSize(new Dimension(875,689));
         this.setMinimumSize(new Dimension(875,689));
         this.setLocationRelativeTo(null);
-        
+     
         try {
             inicializarCodPartidas();
             fl=new File("Partidas");
@@ -480,6 +481,11 @@ public class PantallaJuego extends javax.swing.JFrame {
         UNO.setForeground(resourceMap.getColor("UNO.foreground")); // NOI18N
         UNO.setText(resourceMap.getString("UNO.text")); // NOI18N
         UNO.setName("UNO"); // NOI18N
+        UNO.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                UNOMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -536,7 +542,7 @@ public class PantallaJuego extends javax.swing.JFrame {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addGap(11, 11, 11))
+                .addGap(26, 26, 26))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -551,7 +557,7 @@ public class PantallaJuego extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 292, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
         );
 
         pack();
@@ -586,19 +592,37 @@ private void lblRojoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:eve
 }//GEN-LAST:event_lblRojoMouseEntered
 
 private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-// TODO add your handling code here:
+//Guardar Partida en curso
     String jugador;
     if(turno==0)
         jugador=jugadores[0].Nombre;
     else
         jugador=jugadores[1].Nombre;
     
-    if(JOptionPane.showConfirmDialog(this, jugador+" solicito guardar la partida, está de acuerdo?")==0){
+    if(JOptionPane.showConfirmDialog(this, jugador+" solicitó guardar la partida, está de acuerdo?")==0){
+        RandomAccessFile partidas=null;
             try {
+                if(nomArchivo.equals("")){
+                    int codigoP=getCodPartidas();
+                    if(codigoP!=-1){
+                        partidas= new RandomAccessFile(fl+"\\partidas"+codigoP+".uno","rw");
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(this, "ERROR: La partida no se ha podido guardar, intentelo mas tarde.");
+                    }
+                }
+                else{                   
+                    if(!nomArchivo.equalsIgnoreCase("")){
+                        File files[]=fl.listFiles();
+                        for(File fu:files){
+                            if(fu.isFile() && fu.getName().equalsIgnoreCase(nomArchivo))
+                                fu.delete();
+                        }                   
+                    }
+                    fl.createNewFile();
+                    partidas= new RandomAccessFile("Partidas\\"+nomArchivo,"rw");
+                }
                 
-                int codigoP=getCodPartidas();
-                if(codigoP!=-1){
-                    RandomAccessFile partidas= new RandomAccessFile(fl+"\\partidas"+codigoP+".uno","rw");
                     partidas.writeInt(jugadores[0].Codigo);
                     partidas.writeInt(PuntosJ1);
                     partidas.writeInt(Player1Cards.size());
@@ -622,10 +646,7 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
                         partidas.writeUTF(c.Nombre);
                     }      
                     partidas.writeInt(turno);
-                }
-                else{
-                    JOptionPane.showMessageDialog(this, "ERROR: La partida no se ha podido guardar, intentelo mas tarde.");
-                }
+               
                 JOptionPane.showMessageDialog(this, "Partida Guardada exitosamente!!!");
                 irAMenuPrincipal();
             } catch (Exception ex) {
@@ -635,7 +656,7 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
 }//GEN-LAST:event_jButton1MouseClicked
 
 private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-// TODO add your handling code here:
+
     //Retirarse del juego
     if(JOptionPane.showConfirmDialog(this, "Está seguro de abandonar la partida?")==0){
         if(turno==0){
@@ -653,7 +674,26 @@ private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
                     }
                 }
             }
-            JOptionPane.showMessageDialog(null,jugadores[1].Nombre + " ha ganado el juego con "+PuntosJ2+" puntos sobre "+jugadores[0].Nombre+" que obtuvo "+PuntosJ1+"puntos!!!");
+            resultado=jugadores[1].Nombre + " ganó en UNO!"+" con "+PuntosJ2+" puntos porque "+jugadores[0].Nombre+" se retiró" ;
+            h.GuardarHistorial(resultado);
+            
+            if(!nomArchivo.equalsIgnoreCase("")){
+                  File files[]=fl.listFiles();
+                  for(File fu:files){
+                      if(fu.isFile() && fu.getName().equalsIgnoreCase(nomArchivo))
+                          fu.delete();
+                  }                   
+            }
+            
+            try{
+                j.ActualizarPuntos(jugadores[0].Codigo, PuntosJ1);
+                j.ActualizarPuntos(jugadores[1].Codigo, PuntosJ2);
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(this, "ERROR: "+e.getMessage());
+            }
+            
+            JOptionPane.showMessageDialog(null,resultado);
             irAMenuPrincipal();
         }
         else{
@@ -671,12 +711,46 @@ private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
                     }
                 }
             }
-            JOptionPane.showMessageDialog(null,jugadores[0].Nombre + " ha ganado el juego con "+PuntosJ1+" puntos sobre "+jugadores[1].Nombre+" que obtuvo "+PuntosJ2+"puntos!!!");
+            resultado=jugadores[0].Nombre + " ganó en UNO!"+" con "+PuntosJ1+" puntos porque "+jugadores[1].Nombre+" se retiró" ;
+            h.GuardarHistorial(resultado);
+            
+           if(!nomArchivo.equalsIgnoreCase("")){
+              File files[]=fl.listFiles();
+              for(File fu:files){
+                  if(fu.isFile() && fu.getName().equalsIgnoreCase(nomArchivo))
+                      fu.delete();
+              }                   
+           }
+            
+            try{
+                j.ActualizarPuntos(jugadores[0].Codigo, PuntosJ1);
+                j.ActualizarPuntos(jugadores[1].Codigo, PuntosJ2);
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(this, "ERROR: "+e.getMessage());
+            }
+            
+            JOptionPane.showMessageDialog(null,resultado);
             irAMenuPrincipal();
         }
     }
     
 }//GEN-LAST:event_jButton2MouseClicked
+
+private void UNOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UNOMouseClicked
+// TODO add your handling code here:
+    if(Player1Cards.size()==1 && turno==0){
+        castigo=false;
+        timer.stop();         
+    }
+    else if(Player2Cards.size()==1 && turno==1){
+        castigo=false;
+        timer.stop();
+    }        
+    else
+        castigo=true;
+        
+}//GEN-LAST:event_UNOMouseClicked
 
 private void LabelMouseClicked(java.awt.event.MouseEvent evt) {
 // TODO add your handling code here:
@@ -982,34 +1056,6 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
         CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
         CenterCard2.setName(imageName);
         cambioJugador(pos);
-
-//              Player1Cards.remove(pos);
-//              //CardsPanel.remove(((JLabel)etiqueta));
-//              CardsPanel.removeAll();
-//              SelectedCardPanel.removeAll();
-//              SelectedCardPanel.add(CenterCard2);
-//              //CardsPanel.repaint();
-//              ImprimirCartas(Player2Cards);
-//              jLabel1.setText("Turno de "+jugadores[1].Nombre);
-//              jLabel3.setText("Puntos: "+PuntosJ2);
-//              turno=1;
-//           }
-//           else{              
-//              CenterCard2= new JLabel(new ImageIcon(imageName+".png"));
-//              CenterCard2.setName(imageName);
-//              cambioJugador(pos);
-
-//              Player2Cards.remove(pos);
-//              //CardsPanel.remove(((JLabel)etiqueta));
-//              CardsPanel.removeAll();
-//              SelectedCardPanel.removeAll();
-//              SelectedCardPanel.add(CenterCard2);
-//              //CardsPanel.repaint();
-//              ImprimirCartas(Player1Cards);
-//              jLabel1.setText("Turno de "+jugadores[0].Nombre);
-//              jLabel3.setText("Puntos: "+PuntosJ1);
-//              turno=0;
-//           }
     }
     
     private void cambioJugador(int pos){
@@ -1028,8 +1074,26 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
                             PuntosJ1+=50; 
                     }
                     
+                }               
+                resultado=jugadores[0].Nombre + " le ganó en UNO! a "+jugadores[1].Nombre+" con "+PuntosJ1+" puntos!" ;
+                
+                if(!nomArchivo.equalsIgnoreCase("")){
+                      File files[]=fl.listFiles();
+                      for(File fu:files){
+                          if(fu.isFile() && fu.getName().equalsIgnoreCase(nomArchivo))
+                              fu.delete();
+                      }                   
+                  }
+                
+                JOptionPane.showMessageDialog(null,resultado);
+                h.GuardarHistorial(resultado);
+                try{
+                    j.ActualizarPuntos(jugadores[0].Codigo, PuntosJ1);
+                    j.ActualizarPuntos(jugadores[1].Codigo, PuntosJ2);
                 }
-                JOptionPane.showMessageDialog(null,jugadores[0].Nombre + " ha ganado el juego con "+PuntosJ1+" puntos sobre "+jugadores[1].Nombre+" que obtuvo "+PuntosJ2+" puntos!!!");
+                catch(Exception e){
+                    JOptionPane.showMessageDialog(this, "ERROR: "+e.getMessage());
+                }
                 Player1Cards=null;
                 Player2Cards=null;    
                 irAMenuPrincipal();
@@ -1038,7 +1102,19 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
                 UNO.setVisible(true);
                 timer.start();
                 
+                Player1Cards.remove(pos);
+                //CardsPanel.remove(((JLabel)etiqueta));
+                CardsPanel.removeAll();
+                SelectedCardPanel.removeAll();
+                SelectedCardPanel.add(CenterCard2);
+                //CardsPanel.repaint();
+                ImprimirCartas(Player2Cards);
+                jLabel1.setText("Turno de "+jugadores[1].Nombre);
+                jLabel3.setText("Puntos: "+PuntosJ2);
+                turno=1; 
                 
+                UNO.setVisible(true);
+                timer.start();
             }
             else{
                 Player1Cards.remove(pos);
@@ -1070,7 +1146,26 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
                     }
 
                   }
-                  JOptionPane.showMessageDialog(null,jugadores[1].Nombre + " ha ganado el juego con "+PuntosJ2+" puntos sobre "+jugadores[0].Nombre+" que obtuvo "+PuntosJ1+" puntos!!!");
+                  resultado=jugadores[1].Nombre + " le ganó en UNO! a "+jugadores[0].Nombre+" con "+PuntosJ2+" puntos!" ;
+                  
+                  if(!nomArchivo.equalsIgnoreCase("")){
+                      File files[]=fl.listFiles();
+                      for(File fu:files){
+                          if(fu.isFile() && fu.getName().equalsIgnoreCase(nomArchivo))
+                              fu.delete();
+                      }                   
+                  }
+                  
+                  JOptionPane.showMessageDialog(null,resultado);
+                  h.GuardarHistorial(resultado);
+                  
+                  try{
+                      j.ActualizarPuntos(jugadores[0].Codigo, PuntosJ1);
+                      j.ActualizarPuntos(jugadores[1].Codigo, PuntosJ2);
+                  }
+                  catch(Exception e){
+                      JOptionPane.showMessageDialog(this, "ERROR: "+e.getMessage());
+                  }
                   Player1Cards=null;
                   Player2Cards=null;  
                   irAMenuPrincipal();
@@ -1078,6 +1173,7 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
               else if((Player2Cards.size()-1)==1){
                   UNO.setVisible(true);
                   timer.start();
+                  
                   Player2Cards.remove(pos);
                   //CardsPanel.remove(((JLabel)etiqueta));
                   CardsPanel.removeAll();
@@ -1088,6 +1184,9 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
                   jLabel1.setText("Turno de "+jugadores[0].Nombre);
                   jLabel3.setText("Puntos: "+PuntosJ1);
                   turno=0;
+                  
+                  UNO.setVisible(true);                
+                  timer.start();
 
               }
               else {
@@ -1187,18 +1286,33 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
                             PuntosJ1+=50; 
                     }                    
                 }
-                JOptionPane.showMessageDialog(null,jugadores[0].Nombre + " ha ganado el juego con "+PuntosJ1+" puntos sobre "+jugadores[1].Nombre+" que obtuvo "+PuntosJ2+" puntos!!!");
+                resultado=jugadores[0].Nombre + " le ganó en UNO! a "+jugadores[1].Nombre+" con "+PuntosJ1+" puntos!" ;
+                
+                if(!nomArchivo.equalsIgnoreCase("")){
+                      File files[]=fl.listFiles();
+                      for(File fu:files){
+                          if(fu.isFile() && fu.getName().equalsIgnoreCase(nomArchivo))
+                              fu.delete();
+                      }                   
+                  }
+                
+                JOptionPane.showMessageDialog(null,resultado);
+                h.GuardarHistorial(resultado);
+                try{
+                      j.ActualizarPuntos(jugadores[0].Codigo, PuntosJ1);
+                      j.ActualizarPuntos(jugadores[1].Codigo, PuntosJ2);
+                }
+                catch(Exception e){
+                      JOptionPane.showMessageDialog(this, "ERROR: "+e.getMessage());
+                }
                 Player1Cards=null;
                 Player2Cards=null;    
                 irAMenuPrincipal();
              }
              else if((Player1Cards.size()-1)==1){               
-                UNO.setVisible(true);
-//                
-//
+                UNO.setVisible(true);                
                 timer.start();
-//               
-//                UNO.setVisible(false);
+         
                 Player1Cards.remove(pos);
                 CardsPanel.removeAll();
                 SelectedCardPanel.removeAll();
@@ -1206,6 +1320,10 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
                 //CardsPanel.repaint();
                 ImprimirCartas(Player1Cards);
                 jLabel3.setText("Puntos: "+PuntosJ1);
+                UNO.setVisible(true);                
+                timer.start();
+//                if(castigo)
+//                    CastigoEspecial();
              }
              else{              
                 Player1Cards.remove(pos);
@@ -1221,49 +1339,121 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
     
     private void validarTamanhoArregloJ2(int pos){
         if((Player2Cards.size()-1)==0){           
-                  for(Cartas c:Player1Cards){
-                    if(c instanceof CartasNumericas)
-                        PuntosJ2+=c.Numero;
-                    else{
-                        String type=((CartasEspeciales)c).tipoCarta;
-                        char tipo=type.charAt(0);
-                        if(tipo=='T'||tipo=='S'||tipo=='R')
-                            PuntosJ2+=20;
-                        else
-                            PuntosJ2+=50; 
-                    }
-                    
-                  }
-                  JOptionPane.showMessageDialog(null,jugadores[1].Nombre + " ha ganado el juego con "+PuntosJ2+" puntos sobre "+jugadores[0].Nombre+" que obtuvo "+PuntosJ1+" puntos!!!");
-                  Player1Cards=null;
-                  Player2Cards=null;  
-                  irAMenuPrincipal();
-               }
-               else if((Player2Cards.size()-1)==1){
-                  UNO.setVisible(true);
-//                                    
-                timer.start();
-//                UNO.setVisible(false);
+          for(Cartas c:Player1Cards){
+            if(c instanceof CartasNumericas)
+                PuntosJ2+=c.Numero;
+            else{
+                String type=((CartasEspeciales)c).tipoCarta;
+                char tipo=type.charAt(0);
+                if(tipo=='T'||tipo=='S'||tipo=='R')
+                    PuntosJ2+=20;
+                else
+                    PuntosJ2+=50; 
+            }
 
-                  
-               }
-               else {                  
+          }
+          resultado=jugadores[1].Nombre + " le ganó en UNO! a "+jugadores[0].Nombre+" con "+PuntosJ2+" puntos!" ;
+          
+          if(!nomArchivo.equalsIgnoreCase("")){
+              File files[]=fl.listFiles();
+              for(File fu:files){
+                  if(fu.isFile() && fu.getName().equalsIgnoreCase(nomArchivo))
+                      fu.delete();
+              }                   
+          }
+          
+          JOptionPane.showMessageDialog(null,resultado);
+          h.GuardarHistorial(resultado);
+          try{
+              j.ActualizarPuntos(jugadores[0].Codigo, PuntosJ1);
+              j.ActualizarPuntos(jugadores[1].Codigo, PuntosJ2);
+          }
+          catch(Exception e){
+              JOptionPane.showMessageDialog(this, "ERROR: "+e.getMessage());
+          }
+          
+          Player1Cards=null;
+          Player2Cards=null;  
+          irAMenuPrincipal();
+       }
+       else if((Player2Cards.size()-1)==1){
+          UNO.setVisible(true);
+          timer.start();
+          
+          Player2Cards.remove(pos);
+          //CardsPanel.remove(((JLabel)etiqueta));
+          CardsPanel.removeAll();
+          SelectedCardPanel.removeAll();
+          SelectedCardPanel.add(CenterCard2);
+          //CardsPanel.repaint();
+          ImprimirCartas(Player2Cards);
+          jLabel3.setText("Puntos: "+PuntosJ2);
+          UNO.setVisible(true);                
+          timer.start();
+//          if(castigo)
+//              CastigoEspecial();
 
-                  Player2Cards.remove(pos);
-                  //CardsPanel.remove(((JLabel)etiqueta));
-                  CardsPanel.removeAll();
-                  SelectedCardPanel.removeAll();
-                  SelectedCardPanel.add(CenterCard2);
-                  //CardsPanel.repaint();
-                  ImprimirCartas(Player2Cards);
-                  jLabel3.setText("Puntos: "+PuntosJ2);
-               }
+       }
+       else {                  
+
+          Player2Cards.remove(pos);
+          //CardsPanel.remove(((JLabel)etiqueta));
+          CardsPanel.removeAll();
+          SelectedCardPanel.removeAll();
+          SelectedCardPanel.add(CenterCard2);
+          //CardsPanel.repaint();
+          ImprimirCartas(Player2Cards);
+          jLabel3.setText("Puntos: "+PuntosJ2);
+       }
     }
     
-    class players{
-    int cod,puntos;
-    String nom;    
-}
+    private void Castigo(){
+        if(cards.size()>0){
+            if(turno==0){
+                JOptionPane.showMessageDialog(this,jugadores[1].Nombre + " haz sido castigado(a) por no haber dicho UNO! tiempo");
+                for (int i=0;i<2;i++){
+                    Cartas card=cards.get(i);
+                    Player2Cards.add(card);
+                    cards.remove(i);
+                }                 
+            }            
+            else{
+                JOptionPane.showMessageDialog(this,jugadores[0].Nombre + " haz sido castigado(a) por no haber dicho UNO! tiempo");
+                for (int i=0;i<2;i++){
+                    Cartas card=cards.get(i);
+                    Player1Cards.add(card);
+                    cards.remove(i);
+                }
+            }                
+        }
+        else{
+            JOptionPane.showMessageDialog(null, " Ya no hay mas cartas!!!");
+        }
+    }
+    
+    private void CastigoEspecial(){
+        if(cards.size()>0){
+            if(turno==0){
+                JOptionPane.showMessageDialog(this,jugadores[0].Nombre + " haz sido castigado(a) por no haber dicho UNO! tiempo");
+                for (int i=0;i<2;i++){
+                    Cartas card=cards.get(i);
+                    Player1Cards.add(card);
+                    cards.remove(i);
+                }                 
+            }            
+            else{
+                JOptionPane.showMessageDialog(this,jugadores[1].Nombre + " haz sido castigado(a) por no haber dicho UNO! tiempo");
+                for (int i=0;i<2;i++){
+                    Cartas card=cards.get(i);
+                    Player2Cards.add(card);
+                    cards.remove(i);
+                }
+            }                
+        }
+        else{
+            JOptionPane.showMessageDialog(null, " Ya no hay mas cartas!!!");
+        }
+    }     
 
 }
 

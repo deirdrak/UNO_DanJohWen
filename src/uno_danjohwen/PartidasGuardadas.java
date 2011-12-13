@@ -37,7 +37,7 @@ public class PartidasGuardadas extends javax.swing.JFrame {
             DefaultListModel modelo = new DefaultListModel();  
             
             for(File arch:archivos){
-                if(!arch.getName().equalsIgnoreCase("CodigoPartidas.uno"))                    
+                if(!arch.getName().equalsIgnoreCase("CodigoPartidas.uno") && !arch.getName().equalsIgnoreCase("Historial.uno"))                    
                     modelo.addElement(arch.getName());
             }
             
@@ -298,7 +298,7 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
                     jugadores2[0]=codJ1==jugadores[0].Codigo?jugadores[0]:jugadores[1];
                     jugadores2[1]=codJ2==jugadores[0].Codigo?jugadores[0]:jugadores[1];
                     
-                    PantallaJuego PJ= new PantallaJuego( CartasJ1, CartasJ2, CartasCentro,jugadores2, CartaCentro,turno,puntosJ1,puntosJ2);
+                    PantallaJuego PJ= new PantallaJuego( CartasJ1, CartasJ2, CartasCentro,jugadores2, CartaCentro,turno,puntosJ1,puntosJ2,archivo);
                     PJ.setVisible(true);
                     this.dispose();
                 }

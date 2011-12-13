@@ -159,4 +159,31 @@ public class Jugadores {
         }
         return null;
     }
+    
+    public Jugadores[] Top10() throws IOException{
+        ArrayList<Jugadores> jug=listarJugadores();
+        Jugadores[] players= new Jugadores[jug.size()];
+        jug.toArray(players);        
+        
+        for(int i=players.length-1;i>0;i--){
+            for(int j=0;j<i;j++){
+                if((!"".equals(players[j].Nombre))&&(!"".equals(players[j+1].Nombre))){
+                    
+                    if(players[j].Puntaje<players[j+1].Puntaje)
+                    {
+                        int tmp=players[j].Puntaje;
+                        String nomTemp=players[j].Nombre;
+                        
+                        players[j].Puntaje=(players[j+1].Puntaje);
+                        players[j].Nombre=(players[j+1].Nombre);
+                        
+                        players[j+1].Puntaje=tmp;
+                        players[j+1].Nombre=nomTemp;
+                    }
+                }
+                
+            }
+        }
+        return players;
+    }
 }

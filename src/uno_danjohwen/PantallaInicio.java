@@ -136,8 +136,8 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
 
 private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
 // TODO add your handling code here:
-    PantallaJugadores pj= new PantallaJugadores();
-    pj.setVisible(true);
+    MenuJugadores MJ= new MenuJugadores();
+    MJ.setVisible(true);
     this.dispose();
 }//GEN-LAST:event_jButton2MouseClicked
 

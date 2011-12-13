@@ -238,61 +238,8 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
     
 }//GEN-LAST:event_jButton1MouseClicked
 
-//public int escribirArchivo(String nom, int edad, char gen, String pass){
-//   int cod=1;
-//   String linea;
-//   String path=System.getProperty("user.dir");
-//   String dirArchivo=path+"\\Jugadores.uno";
-//   File archivo= new File(dirArchivo);
-//   if(archivo.exists()){
-//       try{
-//           
-//          BufferedReader br= new BufferedReader(new FileReader(dirArchivo));
-//          
-//          while((linea= br.readLine())!=null) {
-//              if(!linea.isEmpty()){
-//                  String[]temp=linea.split(";");
-//                  String nombre=temp[1];
-//                  if(nombre.equalsIgnoreCase(nom)){
-//                      return 0;
-//                  }
-//                  else{
-//                      cod=Integer.valueOf(temp[0])+1;
-//                  }
-//              }
-//              else{
-//                  break;
-//              }
-//              
-//          }
-//          
-//          FileWriter escritura= new FileWriter(dirArchivo,true);
-//          escritura.write(cod+";"+nom+";"+edad+";"+gen+";"+pass+"\n");
-//          escritura.close();
-//          return 1;
-//       }
-//        catch(Exception e){
-//          JOptionPane.showMessageDialog(this, e); 
-//          return 2;
-//       }
-//       
-//   }
-//   else{
-//       try
-//       {
-//           BufferedWriter bw = new BufferedWriter(new FileWriter(archivo));//Crear archivo de texto
-//           bw.write(cod+";"+nom+";"+edad+";"+gen+";"+pass+"\n");
-//           bw.close();
-//           return 1;
-//       }
-//       catch(Exception e){
-//           e.getMessage();
-//           return 2;
-//       }
-//   }
-//}
 private void irPantallaLogin(){
-    PantallaLogin p= new PantallaLogin();
+    PantallaLogin p= new PantallaLogin(0);
     p.setVisible(true);
     this.dispose();
 }
