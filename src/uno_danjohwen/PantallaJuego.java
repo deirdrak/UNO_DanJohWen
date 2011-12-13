@@ -56,9 +56,9 @@ public class PantallaJuego extends javax.swing.JFrame {
             String CartaCentro, int turno, int PJ1,int PJ2,String nombreArch){
         initComponents();
         
-        this.setPreferredSize(new Dimension(875,689));
-        this.setMaximumSize(new Dimension(875,689));
-        this.setMinimumSize(new Dimension(875,689));
+//        this.setPreferredSize(new Dimension(875,689));
+//        this.setMaximumSize(new Dimension(875,689));
+//        this.setMinimumSize(new Dimension(875,689));
         this.setLocationRelativeTo(null);
         
         timer = new Timer (3000, new ActionListener () 
@@ -66,6 +66,7 @@ public class PantallaJuego extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) 
             { 
                 UNO.setVisible(false);
+                ejecutarAccion();
             } 
         }); 
         
@@ -74,7 +75,7 @@ public class PantallaJuego extends javax.swing.JFrame {
         jugadores=players;
         nomArchivo=nombreArch;
         this.turno=turno;
-        fl=new File("Partidas\\"+nomArchivo);
+        fl=new File("Partidas");
         ColorChooserPanel.setVisible(false);
         UNO.setVisible(false);
         
@@ -118,6 +119,7 @@ public class PantallaJuego extends javax.swing.JFrame {
         
     }
     
+    
     public PantallaJuego(Jugadores[] Players) {
         initComponents();
         
@@ -125,13 +127,14 @@ public class PantallaJuego extends javax.swing.JFrame {
         {                     
             public void actionPerformed(ActionEvent e) 
             { 
-                UNO.setVisible(false);// Aquí el código que queramos ejecutar.
+                UNO.setVisible(false);
+                ejecutarAccion();
             } 
         }); 
         
-        this.setPreferredSize(new Dimension(875,689));
-        this.setMaximumSize(new Dimension(875,689));
-        this.setMinimumSize(new Dimension(875,689));
+//        this.setPreferredSize(new Dimension(875,689));
+//        this.setMaximumSize(new Dimension(875,689));
+//        this.setMinimumSize(new Dimension(875,689));
         this.setLocationRelativeTo(null);
      
         try {
@@ -289,6 +292,20 @@ public class PantallaJuego extends javax.swing.JFrame {
 
     }
     
+    public void ejecutarAccion(){
+        if(turno==0){
+            ImprimirCartas(Player2Cards);
+            jLabel1.setText("Turno de "+jugadores[1].Nombre);
+            jLabel3.setText("Puntos: "+PuntosJ2);
+            turno=1;                   
+        }
+        else{
+            ImprimirCartas(Player1Cards);
+            jLabel1.setText("Turno de "+jugadores[0].Nombre);
+            jLabel3.setText("Puntos: "+PuntosJ1);
+            turno=1;   
+        }
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -315,6 +332,7 @@ public class PantallaJuego extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         UNO = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(uno_danjohwen.UNO_DanJohWenApp.class).getContext().getResourceMap(PantallaJuego.class);
@@ -327,9 +345,13 @@ public class PantallaJuego extends javax.swing.JFrame {
         mainPanel.setBackground(resourceMap.getColor("mainPanel.background")); // NOI18N
         mainPanel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         mainPanel.setName("mainPanel"); // NOI18N
+        mainPanel.setPreferredSize(new java.awt.Dimension(875, 700));
+        mainPanel.setLayout(null);
 
         CenterPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         CenterPanel.setName("CenterPanel"); // NOI18N
+        mainPanel.add(CenterPanel);
+        CenterPanel.setBounds(630, 230, 92, 152);
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
@@ -339,11 +361,16 @@ public class PantallaJuego extends javax.swing.JFrame {
         CardsPanel.setAlignmentY(10.0F);
         CardsPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         CardsPanel.setName("CardsPanel"); // NOI18N
-        CardsPanel.setLayout(new java.awt.GridLayout(1, 0));
+        CardsPanel.setLayout(new java.awt.GridLayout());
         jScrollPane1.setViewportView(CardsPanel);
+
+        mainPanel.add(jScrollPane1);
+        jScrollPane1.setBounds(160, 520, 568, 160);
 
         SelectedCardPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         SelectedCardPanel.setName("SelectedCardPanel"); // NOI18N
+        mainPanel.add(SelectedCardPanel);
+        SelectedCardPanel.setBounds(740, 230, 92, 152);
 
         PlayerTurnPanel.setBackground(resourceMap.getColor("PlayerTurnPanel.background")); // NOI18N
         PlayerTurnPanel.setName("PlayerTurnPanel"); // NOI18N
@@ -364,17 +391,20 @@ public class PantallaJuego extends javax.swing.JFrame {
                 .addGroup(PlayerTurnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel1))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         PlayerTurnPanelLayout.setVerticalGroup(
             PlayerTurnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PlayerTurnPanelLayout.createSequentialGroup()
-                .addContainerGap(117, Short.MAX_VALUE)
+                .addContainerGap(132, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(12, 12, 12))
         );
+
+        mainPanel.add(PlayerTurnPanel);
+        PlayerTurnPanel.setBounds(50, 170, 160, 150);
 
         ColorChooserPanel.setBackground(resourceMap.getColor("ColorChooserPanel.background")); // NOI18N
         ColorChooserPanel.setBorder(new javax.swing.border.LineBorder(resourceMap.getColor("ColorChooserPanel.border.lineColor"), 1, true)); // NOI18N
@@ -397,6 +427,7 @@ public class PantallaJuego extends javax.swing.JFrame {
         lblAmarillo.setBackground(resourceMap.getColor("lblAmarillo.background")); // NOI18N
         lblAmarillo.setIcon(resourceMap.getIcon("lblAmarillo.icon")); // NOI18N
         lblAmarillo.setName("lblAmarillo"); // NOI18N
+        lblAmarillo.setOpaque(true);
         lblAmarillo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblAmarilloMouseClicked(evt);
@@ -437,7 +468,7 @@ public class PantallaJuego extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addGroup(ColorChooserPanelLayout.createSequentialGroup()
                         .addComponent(lblAmarillo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(lblRojo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblAzul, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -451,16 +482,17 @@ public class PantallaJuego extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(14, 14, 14)
                 .addGroup(ColorChooserPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAmarillo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblRojo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblAzul, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblVerde, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
-            .addGroup(ColorChooserPanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(lblAmarillo, javax.swing.GroupLayout.PREFERRED_SIZE, 53, Short.MAX_VALUE)
-                .addGap(45, 45, 45))
         );
 
+        mainPanel.add(ColorChooserPanel);
+        ColorChooserPanel.setBounds(290, 180, 299, 80);
+
+        jButton1.setFont(resourceMap.getFont("jButton1.font")); // NOI18N
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
         jButton1.setName("jButton1"); // NOI18N
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -468,7 +500,10 @@ public class PantallaJuego extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
+        mainPanel.add(jButton1);
+        jButton1.setBounds(560, 10, 127, 25);
 
+        jButton2.setFont(resourceMap.getFont("jButton2.font")); // NOI18N
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
         jButton2.setName("jButton2"); // NOI18N
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -476,6 +511,8 @@ public class PantallaJuego extends javax.swing.JFrame {
                 jButton2MouseClicked(evt);
             }
         });
+        mainPanel.add(jButton2);
+        jButton2.setBounds(700, 10, 140, 25);
 
         UNO.setFont(resourceMap.getFont("UNO.font")); // NOI18N
         UNO.setForeground(resourceMap.getColor("UNO.foreground")); // NOI18N
@@ -486,78 +523,28 @@ public class PantallaJuego extends javax.swing.JFrame {
                 UNOMouseClicked(evt);
             }
         });
+        mainPanel.add(UNO);
+        UNO.setBounds(760, 560, 69, 25);
 
-        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
-        mainPanel.setLayout(mainPanelLayout);
-        mainPanelLayout.setHorizontalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(PlayerTurnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(UNO)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
-                                .addComponent(CenterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(SelectedCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(60, 60, 60))
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addComponent(ColorChooserPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                                .addGap(44, 44, 44))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(31, 31, 31)
-                        .addComponent(jButton2)
-                        .addContainerGap(371, Short.MAX_VALUE))))
-        );
-        mainPanelLayout.setVerticalGroup(
-            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(mainPanelLayout.createSequentialGroup()
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(PlayerTurnPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addGap(69, 69, 69)
-                                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(CenterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(SelectedCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(mainPanelLayout.createSequentialGroup()
-                                .addGap(48, 48, 48)
-                                .addComponent(UNO)))
-                        .addGap(44, 44, 44)
-                        .addComponent(ColorChooserPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(26, 26, 26))
-        );
+        jLabel4.setIcon(resourceMap.getIcon("jLabel4.icon")); // NOI18N
+        jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
+        jLabel4.setName("jLabel4"); // NOI18N
+        mainPanel.add(jLabel4);
+        jLabel4.setBounds(0, 0, 875, 700);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 594, Short.MAX_VALUE)
+            .addGap(0, 875, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(mainPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 875, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 292, Short.MAX_VALUE)
+            .addGap(0, 700, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
         );
 
         pack();
@@ -620,7 +607,7 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
                         }                   
                     }
                     fl.createNewFile();
-                    partidas= new RandomAccessFile("Partidas\\"+nomArchivo,"rw");
+                    partidas= new RandomAccessFile(fl+"\\"+nomArchivo,"rw");
                 }
                 
                     partidas.writeInt(jugadores[0].Codigo);
@@ -646,6 +633,7 @@ private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
                         partidas.writeUTF(c.Nombre);
                     }      
                     partidas.writeInt(turno);
+                    partidas.close();
                
                 JOptionPane.showMessageDialog(this, "Partida Guardada exitosamente!!!");
                 irAMenuPrincipal();
@@ -741,15 +729,20 @@ private void UNOMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_U
 // TODO add your handling code here:
     if(Player1Cards.size()==1 && turno==0){
         castigo=false;
-        timer.stop();         
+        timer.stop();
+        UNO.setVisible(false);
     }
     else if(Player2Cards.size()==1 && turno==1){
         castigo=false;
         timer.stop();
+        UNO.setVisible(false);
     }        
-    else
+    else{
         castigo=true;
-        
+        timer.stop();
+        UNO.setVisible(false);
+        Castigo();
+    }
 }//GEN-LAST:event_UNOMouseClicked
 
 private void LabelMouseClicked(java.awt.event.MouseEvent evt) {
@@ -964,6 +957,7 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAmarillo;
     private javax.swing.JLabel lblAzul;
@@ -1100,21 +1094,16 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
             }
             else if((Player1Cards.size()-1)==1){               
                 UNO.setVisible(true);
-                timer.start();
-                
+                timer.start();            
+               
                 Player1Cards.remove(pos);
                 //CardsPanel.remove(((JLabel)etiqueta));
                 CardsPanel.removeAll();
                 SelectedCardPanel.removeAll();
                 SelectedCardPanel.add(CenterCard2);
                 //CardsPanel.repaint();
-                ImprimirCartas(Player2Cards);
-                jLabel1.setText("Turno de "+jugadores[1].Nombre);
-                jLabel3.setText("Puntos: "+PuntosJ2);
-                turno=1; 
+               
                 
-                UNO.setVisible(true);
-                timer.start();
             }
             else{
                 Player1Cards.remove(pos);
@@ -1172,7 +1161,7 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
               }
               else if((Player2Cards.size()-1)==1){
                   UNO.setVisible(true);
-                  timer.start();
+                  timer.start();                  
                   
                   Player2Cards.remove(pos);
                   //CardsPanel.remove(((JLabel)etiqueta));
@@ -1180,13 +1169,13 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
                   SelectedCardPanel.removeAll();
                   SelectedCardPanel.add(CenterCard2);
                   //CardsPanel.repaint();
-                  ImprimirCartas(Player1Cards);
-                  jLabel1.setText("Turno de "+jugadores[0].Nombre);
-                  jLabel3.setText("Puntos: "+PuntosJ1);
-                  turno=0;
+//                  ImprimirCartas(Player1Cards);
+//                  jLabel1.setText("Turno de "+jugadores[0].Nombre);
+//                  jLabel3.setText("Puntos: "+PuntosJ1);
+//                  turno=0;         
                   
-                  UNO.setVisible(true);                
-                  timer.start();
+//                  UNO.setVisible(true);                
+//                  timer.start();
 
               }
               else {
@@ -1272,8 +1261,7 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
     }
     
     private void validarTamanhoArregloJ1(int pos){
-        if((Player1Cards.size()-1)==0){
-                
+        if((Player1Cards.size()-1)==0){                
                 for(Cartas c:Player2Cards){
                     if(c instanceof CartasNumericas)
                         PuntosJ1+=c.Numero;
@@ -1311,17 +1299,18 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
              }
              else if((Player1Cards.size()-1)==1){               
                 UNO.setVisible(true);                
-                timer.start();
-         
+                timer.start();         
+                
                 Player1Cards.remove(pos);
                 CardsPanel.removeAll();
                 SelectedCardPanel.removeAll();
                 SelectedCardPanel.add(CenterCard2);
                 //CardsPanel.repaint();
                 ImprimirCartas(Player1Cards);
-                jLabel3.setText("Puntos: "+PuntosJ1);
-                UNO.setVisible(true);                
-                timer.start();
+                jLabel3.setText("Puntos: "+PuntosJ1);          
+                
+//                UNO.setVisible(true);                
+//                timer.start();
 //                if(castigo)
 //                    CastigoEspecial();
              }
@@ -1380,6 +1369,7 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
           UNO.setVisible(true);
           timer.start();
           
+          
           Player2Cards.remove(pos);
           //CardsPanel.remove(((JLabel)etiqueta));
           CardsPanel.removeAll();
@@ -1388,8 +1378,10 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
           //CardsPanel.repaint();
           ImprimirCartas(Player2Cards);
           jLabel3.setText("Puntos: "+PuntosJ2);
-          UNO.setVisible(true);                
-          timer.start();
+          
+          
+//          UNO.setVisible(true);                
+//          timer.start();
 //          if(castigo)
 //              CastigoEspecial();
 
@@ -1410,7 +1402,7 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
     private void Castigo(){
         if(cards.size()>0){
             if(turno==0){
-                JOptionPane.showMessageDialog(this,jugadores[1].Nombre + " haz sido castigado(a) por no haber dicho UNO! tiempo");
+                JOptionPane.showMessageDialog(this,jugadores[1].Nombre + " haz sido castigado(a) por no haber dicho UNO! a tiempo");
                 for (int i=0;i<2;i++){
                     Cartas card=cards.get(i);
                     Player2Cards.add(card);
@@ -1418,7 +1410,7 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
                 }                 
             }            
             else{
-                JOptionPane.showMessageDialog(this,jugadores[0].Nombre + " haz sido castigado(a) por no haber dicho UNO! tiempo");
+                JOptionPane.showMessageDialog(this,jugadores[0].Nombre + " haz sido castigado(a) por no haber dicho UNO! a tiempo");
                 for (int i=0;i<2;i++){
                     Cartas card=cards.get(i);
                     Player1Cards.add(card);
@@ -1434,7 +1426,7 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
     private void CastigoEspecial(){
         if(cards.size()>0){
             if(turno==0){
-                JOptionPane.showMessageDialog(this,jugadores[0].Nombre + " haz sido castigado(a) por no haber dicho UNO! tiempo");
+                JOptionPane.showMessageDialog(this,jugadores[0].Nombre + " haz sido castigado(a) por no haber dicho UNO! a tiempo");
                 for (int i=0;i<2;i++){
                     Cartas card=cards.get(i);
                     Player1Cards.add(card);
@@ -1442,7 +1434,7 @@ private void LabelMouseExited(java.awt.event.MouseEvent evt) {
                 }                 
             }            
             else{
-                JOptionPane.showMessageDialog(this,jugadores[1].Nombre + " haz sido castigado(a) por no haber dicho UNO! tiempo");
+                JOptionPane.showMessageDialog(this,jugadores[1].Nombre + " haz sido castigado(a) por no haber dicho UNO! a tiempo");
                 for (int i=0;i<2;i++){
                     Cartas card=cards.get(i);
                     Player2Cards.add(card);

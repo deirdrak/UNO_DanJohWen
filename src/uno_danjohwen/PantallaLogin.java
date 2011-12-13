@@ -68,6 +68,7 @@ public class PantallaLogin extends javax.swing.JFrame {
         PlayersList = new javax.swing.JList();
         CrearJugador = new javax.swing.JButton();
         EliminarJugador = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(uno_danjohwen.UNO_DanJohWenApp.class).getContext().getResourceMap(PantallaLogin.class);
@@ -80,10 +81,11 @@ public class PantallaLogin extends javax.swing.JFrame {
         jPanel1.setLayout(null);
 
         jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
+        jLabel1.setForeground(resourceMap.getColor("jLabel1.foreground")); // NOI18N
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
         jPanel1.add(jLabel1);
-        jLabel1.setBounds(130, 10, 217, 29);
+        jLabel1.setBounds(160, 30, 217, 29);
 
         btnEntrar.setFont(resourceMap.getFont("btnEntrar.font")); // NOI18N
         btnEntrar.setText(resourceMap.getString("btnEntrar.text")); // NOI18N
@@ -94,13 +96,13 @@ public class PantallaLogin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnEntrar);
-        btnEntrar.setBounds(132, 256, 87, 25);
+        btnEntrar.setBounds(60, 130, 87, 25);
 
         lblJugador.setFont(resourceMap.getFont("lblJugador.font")); // NOI18N
         lblJugador.setText(resourceMap.getString("lblJugador.text")); // NOI18N
         lblJugador.setName("lblJugador"); // NOI18N
         jPanel1.add(lblJugador);
-        lblJugador.setBounds(167, 51, 86, 15);
+        lblJugador.setBounds(210, 70, 86, 15);
 
         jButton2.setFont(resourceMap.getFont("jButton2.font")); // NOI18N
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
@@ -111,7 +113,7 @@ public class PantallaLogin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(239, 287, 69, 25);
+        jButton2.setBounds(70, 90, 69, 25);
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
@@ -123,7 +125,7 @@ public class PantallaLogin extends javax.swing.JFrame {
         jScrollPane1.setViewportView(PlayersList);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(120, 80, 197, 154);
+        jScrollPane1.setBounds(160, 90, 197, 200);
 
         CrearJugador.setFont(resourceMap.getFont("CrearJugador.font")); // NOI18N
         CrearJugador.setText(resourceMap.getString("CrearJugador.text")); // NOI18N
@@ -134,7 +136,7 @@ public class PantallaLogin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(CrearJugador);
-        CrearJugador.setBounds(237, 256, 71, 25);
+        CrearJugador.setBounds(380, 90, 71, 25);
 
         EliminarJugador.setFont(resourceMap.getFont("EliminarJugador.font")); // NOI18N
         EliminarJugador.setText(resourceMap.getString("EliminarJugador.text")); // NOI18N
@@ -145,17 +147,23 @@ public class PantallaLogin extends javax.swing.JFrame {
             }
         });
         jPanel1.add(EliminarJugador);
-        EliminarJugador.setBounds(132, 285, 87, 25);
+        EliminarJugador.setBounds(370, 130, 87, 25);
+
+        jLabel2.setIcon(resourceMap.getIcon("jLabel2.icon")); // NOI18N
+        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
+        jLabel2.setName("jLabel2"); // NOI18N
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, 0, 535, 334);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         getAccessibleContext().setAccessibleParent(this);
@@ -307,6 +315,7 @@ private void EliminarJugadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-F
     private javax.swing.JButton btnEntrar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblJugador;

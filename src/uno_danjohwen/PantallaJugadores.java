@@ -41,7 +41,6 @@ public class PantallaJugadores extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -56,6 +55,7 @@ public class PantallaJugadores extends javax.swing.JFrame {
         lblfoto = new javax.swing.JLabel();
         btnsubirfoto = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(uno_danjohwen.UNO_DanJohWenApp.class).getContext().getResourceMap(PantallaJugadores.class);
@@ -63,47 +63,50 @@ public class PantallaJugadores extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setName("Form"); // NOI18N
 
-        jPanel1.setBackground(resourceMap.getColor("jPanel1.background")); // NOI18N
-        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        jPanel1.setName("jPanel1"); // NOI18N
-
         jPanel2.setBackground(resourceMap.getColor("jPanel2.background")); // NOI18N
         jPanel2.setName("jPanel2"); // NOI18N
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setLayout(null);
 
         jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
         jLabel1.setForeground(resourceMap.getColor("jLabel1.foreground")); // NOI18N
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, -1, -1));
+        jPanel2.add(jLabel1);
+        jLabel1.setBounds(170, 30, 180, 29);
 
         jLabel2.setFont(resourceMap.getFont("jLabel2.font")); // NOI18N
         jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 60, -1, -1));
+        jPanel2.add(jLabel2);
+        jLabel2.setBounds(70, 80, 47, 15);
 
         jLabel3.setFont(resourceMap.getFont("jLabel3.font")); // NOI18N
         jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 90, -1, -1));
+        jPanel2.add(jLabel3);
+        jLabel3.setBounds(70, 110, 30, 15);
 
         jLabel4.setFont(resourceMap.getFont("jLabel4.font")); // NOI18N
         jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
         jLabel4.setName("jLabel4"); // NOI18N
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, -1, -1));
+        jPanel2.add(jLabel4);
+        jLabel4.setBounds(70, 150, 43, 15);
 
         txtnombre.setText(resourceMap.getString("txtnombre.text")); // NOI18N
         txtnombre.setName("txtnombre"); // NOI18N
-        jPanel2.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 133, -1));
+        jPanel2.add(txtnombre);
+        txtnombre.setBounds(160, 80, 133, 20);
 
         txtedad.setText(resourceMap.getString("txtedad.text")); // NOI18N
         txtedad.setName("txtedad"); // NOI18N
-        jPanel2.add(txtedad, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 67, -1));
+        jPanel2.add(txtedad);
+        txtedad.setBounds(160, 110, 67, 20);
 
         cbgenero.setFont(resourceMap.getFont("cbgenero.font")); // NOI18N
         cbgenero.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Femenino" }));
         cbgenero.setName("cbgenero"); // NOI18N
-        jPanel2.add(cbgenero, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, -1, -1));
+        jPanel2.add(cbgenero);
+        cbgenero.setBounds(160, 150, 86, 21);
 
         jButton1.setFont(resourceMap.getFont("jButton1.font")); // NOI18N
         jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
@@ -113,7 +116,8 @@ public class PantallaJugadores extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 190, -1, -1));
+        jPanel2.add(jButton1);
+        jButton1.setBounds(80, 200, 81, 23);
 
         btnAtras.setFont(resourceMap.getFont("btnAtras.font")); // NOI18N
         btnAtras.setText(resourceMap.getString("btnAtras.text")); // NOI18N
@@ -123,7 +127,8 @@ public class PantallaJugadores extends javax.swing.JFrame {
                 btnAtrasMouseClicked(evt);
             }
         });
-        jPanel2.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, -1, -1));
+        jPanel2.add(btnAtras);
+        btnAtras.setBounds(200, 200, 65, 23);
 
         PanelFoto.setBorder(javax.swing.BorderFactory.createLineBorder(resourceMap.getColor("PanelFoto.border.lineColor"))); // NOI18N
         PanelFoto.setName("PanelFoto"); // NOI18N
@@ -142,7 +147,8 @@ public class PantallaJugadores extends javax.swing.JFrame {
             .addComponent(lblfoto, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
         );
 
-        jPanel2.add(PanelFoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 51, -1, -1));
+        jPanel2.add(PanelFoto);
+        PanelFoto.setBounds(330, 70, 135, 119);
 
         btnsubirfoto.setFont(resourceMap.getFont("btnsubirfoto.font")); // NOI18N
         btnsubirfoto.setText(resourceMap.getString("btnsubirfoto.text")); // NOI18N
@@ -152,7 +158,8 @@ public class PantallaJugadores extends javax.swing.JFrame {
                 btnsubirfotoMouseClicked(evt);
             }
         });
-        jPanel2.add(btnsubirfoto, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 190, 135, -1));
+        jPanel2.add(btnsubirfoto);
+        btnsubirfoto.setBounds(330, 200, 135, 23);
 
         jButton2.setFont(resourceMap.getFont("jButton2.font")); // NOI18N
         jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
@@ -162,34 +169,24 @@ public class PantallaJugadores extends javax.swing.JFrame {
                 jButton2MouseClicked(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
+        jPanel2.add(jButton2);
+        jButton2.setBounds(60, 290, 121, 23);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
+        jLabel5.setIcon(resourceMap.getIcon("jLabel5.icon")); // NOI18N
+        jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
+        jLabel5.setName("jLabel5"); // NOI18N
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(0, 0, 535, 334);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
         );
 
         getAccessibleContext().setAccessibleParent(this);
@@ -341,7 +338,7 @@ private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:ev
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblfoto;
     private javax.swing.JTextField txtedad;

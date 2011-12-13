@@ -24,9 +24,9 @@ public class PantallaInicio extends javax.swing.JFrame {
         //this.setSize(300, 400);
         initComponents();
         
-        this.setPreferredSize(new Dimension(875,689));
-        this.setMaximumSize(new Dimension(875,689));
-        this.setMinimumSize(new Dimension(875,689));
+        this.setPreferredSize(new Dimension(875,547));
+        this.setMaximumSize(new Dimension(875,547));
+        this.setMinimumSize(new Dimension(875,547));
         this.setLocationRelativeTo(null);
               
     }
@@ -71,7 +71,7 @@ public class PantallaInicio extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(150, 110, 170, 51);
+        jButton2.setBounds(250, 0, 170, 37);
 
         jButton3.setBackground(resourceMap.getColor("jButton3.background")); // NOI18N
         jButton3.setFont(resourceMap.getFont("jButton3.font")); // NOI18N
@@ -84,7 +84,7 @@ public class PantallaInicio extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(300, 190, 170, 51);
+        jButton3.setBounds(680, 0, 170, 36);
 
         jButton1.setBackground(resourceMap.getColor("jButton1.background")); // NOI18N
         jButton1.setFont(resourceMap.getFont("jButton1.font")); // NOI18N
@@ -97,29 +97,23 @@ public class PantallaInicio extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(0, 10, 170, 51);
+        jButton1.setBounds(20, 0, 170, 37);
 
         jLabel1.setIcon(resourceMap.getIcon("jLabel1.icon")); // NOI18N
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setMaximumSize(new java.awt.Dimension(875, 689));
-        jLabel1.setMinimumSize(new java.awt.Dimension(875, 689));
         jLabel1.setName("jLabel1"); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 0, 875, 547);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 875, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         getAccessibleContext().setAccessibleParent(this);
